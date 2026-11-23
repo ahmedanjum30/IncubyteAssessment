@@ -2,8 +2,11 @@ import { fileURLToPath } from 'node:url';
 import type { NextConfig } from 'next';
 
 const apiUrl = process.env.API_URL ?? 'http://127.0.0.1:3001';
+const basePath = process.env.BASE_PATH ?? '';
 
 const config: NextConfig = {
+  basePath,
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,

@@ -10,7 +10,8 @@ COPY tsconfig.base.json ./
 COPY packages/shared packages/shared
 COPY apps/web apps/web
 ARG API_URL=http://api:3001
-ENV API_URL=$API_URL NEXT_TELEMETRY_DISABLED=1
+ARG BASE_PATH=
+ENV API_URL=$API_URL BASE_PATH=$BASE_PATH NEXT_TELEMETRY_DISABLED=1
 RUN npm run build -w @acme/shared && npm run build -w @acme/web
 
 FROM node:24-alpine AS runtime

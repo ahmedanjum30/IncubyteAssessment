@@ -35,8 +35,10 @@ export function toQueryString(params: object): string {
   return s ? `?${s}` : '';
 }
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`/api${path}`, {
+  const res = await fetch(`${BASE_PATH}/api${path}`, {
     ...init,
     headers: init?.body ? { 'Content-Type': 'application/json', ...init.headers } : init?.headers,
   });
