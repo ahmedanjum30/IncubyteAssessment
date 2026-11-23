@@ -64,6 +64,16 @@ Requested: "/impeccable polish", "do a security check if we have missed anything
 | Date input was taller than the other fields                              | All inputs fixed at 42px.                                                                                                                                                  |
 | "+" crosshairs on dialogs (user feedback)                                | Removed. Crosshairs stay on plates only, and the rule is recorded in `DESIGN.md`.                                                                                          |
 
+### Deploying next to another project
+
+The Oracle VM already ran another production app (PlayFlight) with its own Caddy on 80/443. ACME Pay was added at `/acme-pay`, with a chooser on the root.
+
+| Found                                                                                     | Fix                                                                                                                                                                                                                                                                                               |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| After joining PlayFlight's Docker network, its root page was sometimes served by ACME Pay | Docker adds each service name as a DNS alias, so `web` resolved to both apps and Caddy round-robined between them. I detached immediately, then renamed the services to `acme-db` / `acme-api` / `acme-web` and confirmed with `getent hosts web` on that network.                                |
+| Caddyfile edits had no effect                                                             | PlayFlight's deploy uses `rsync`, which swaps the file's inode, while the Caddy container still held the old single-file bind mount. The edits were loaded without downtime via `docker cp` + `caddy reload`, after checking the running config equalled the host file apart from the new routes. |
+| `/acme-pay` "worked" on the first try                                                     | It only worked through the alias clash above. Every check was then repeated 6× to rule out round-robin luck.                                                                                                                                                                                      |
+
 ## What I kept for myself
 
 - Product scope and the "left out" list in the requirements.

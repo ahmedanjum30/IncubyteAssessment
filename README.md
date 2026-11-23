@@ -1,5 +1,7 @@
 # ACME Pay
 
+**Live demo:** https://129-80-216-14.sslip.io/acme-pay (synthetic data, Oracle Cloud free-tier ARM VM)
+
 Salary management for ACME's HR Manager: keep salary records for 10,000 employees in 12 countries accurate, and answer "how do we pay people?" without exporting to Excel.
 
 ![Overview](docs/screenshots/overview.png)
@@ -104,7 +106,18 @@ Validation errors return `400` with `issues: [{ path, message }]`, a duplicate e
 3. `cp .env.example .env`, then set a strong `POSTGRES_PASSWORD`. Set `SITE_ADDRESS=pay.example.com` for automatic HTTPS, or keep `:80`.
 4. `docker compose up -d --build --wait`, then run the seed command above.
 
-The images build natively on ARM. CI also cross-builds them for arm64 on every push. Optional Cloudflare proxy and load balancer setups are described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+The images build natively on ARM. CI also cross-builds them for arm64 on every push.
+
+### Sharing a host that already has a reverse proxy
+
+The live demo runs this way: another project's Caddy already owns ports 80/443.
+
+```bash
+# .env: BASE_PATH=/acme-pay, EDGE_NETWORK=<that proxy's docker network>, WEB_ORIGIN=https://<host>
+docker compose -f docker-compose.yml -f deploy/compose.shared-proxy.yml up -d --build --wait
+```
+
+Then paste `deploy/Caddyfile.shared-hub` into the proxy's site block and reload Caddy. It adds the `/acme-pay` routes and a small chooser on the bare root. Services are prefixed `acme-*` on purpose: Docker registers service names as DNS names on a shared network, so a generic `web` would answer for the other project's `web` too. Optional Cloudflare proxy and load balancer setups are described in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Further reading
 
