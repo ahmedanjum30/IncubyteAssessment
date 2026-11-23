@@ -7,7 +7,7 @@ import { useMemo, useState } from 'react';
 import { api, keys } from '@/lib/api';
 import { count, usd } from '@/lib/format';
 import { BelowBandTable } from './BelowBandTable';
-import { BoxPlot, type BoxPlotRow } from './BoxPlot';
+import { BoxPlot, BoxPlotSkeleton, type BoxPlotRow } from './BoxPlot';
 import { CountUp } from './CountUp';
 import { Plate } from './Plate';
 import { Seal } from './Seal';
@@ -60,7 +60,7 @@ export function OverviewView() {
         p90: d.p90,
         bandMin: d.bandMinMedian,
         attention: d.bandMinMedian !== null && d.median < d.bandMinMedian,
-        detail: `${d.countryName} · ${count(d.headcount)} people · ${count(d.belowBand)} below band`,
+        meta: `${count(d.headcount)} people · ${count(d.belowBand)} below band`,
       })),
     [distribution.data],
   );
@@ -135,6 +135,8 @@ export function OverviewView() {
       >
         {distribution.isError ? (
           <p className="error-text">Could not load the distribution. Refresh to try again.</p>
+        ) : !distribution.data ? (
+          <BoxPlotSkeleton />
         ) : (
           <BoxPlot
             rows={rows}

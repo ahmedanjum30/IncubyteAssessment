@@ -87,10 +87,6 @@ button:disabled {
   opacity: 0.5;
 }
 
-table {
-  font-variant-numeric: tabular-nums;
-}
-
 .mono {
   font-family: var(--font-mono);
   font-size: var(--fs-label);
@@ -197,6 +193,7 @@ table {
   min-height: 42px;
   padding: 9px 12px;
   border: 1px solid var(--hair);
+  height: 42px;
   border-radius: 0;
   background: var(--paper);
   transition: border-color 0.15s;

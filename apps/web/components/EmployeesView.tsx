@@ -44,6 +44,20 @@ export function EmployeesView() {
   );
   const [search, setSearch] = useState(query.q ?? '');
   const [adding, setAdding] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const activeFilters = [query.country, query.department, query.jobTitle, query.band].filter(
+    Boolean,
+  ).length;
+  const clearFilters = () => {
+    setSearch('');
+    update({
+      q: undefined,
+      country: undefined,
+      department: undefined,
+      jobTitle: undefined,
+      band: undefined,
+    });
+  };
 
   const update = (patch: Partial<EmployeeListQuery>) => {
     const next = { ...query, ...patch, page: patch.page ?? 1 };
@@ -102,7 +116,7 @@ export function EmployeesView() {
         </button>
       </div>
 
-      <search className={styles.filters}>
+      <search className={styles.filters} data-open={filtersOpen || undefined}>
         <label className={`field ${styles.search}`}>
           <span>Search</span>
           <input
@@ -116,6 +130,14 @@ export function EmployeesView() {
             placeholder="Name, email or employee code"
           />
         </label>
+        <button
+          type="button"
+          className={`btn btn-ghost ${styles.filterToggle}`}
+          aria-expanded={filtersOpen}
+          onClick={() => setFiltersOpen((o) => !o)}
+        >
+          Filters{activeFilters ? ` (${activeFilters})` : ''}
+        </button>
         <label className="field">
           <span>Country</span>
           <select
@@ -248,6 +270,13 @@ export function EmployeesView() {
                 <tr>
                   <td colSpan={COLUMNS.length} className={tableStyles.empty}>
                     No employees match these filters.
+                    <button
+                      type="button"
+                      className={`link ${tableStyles.emptyAction}`}
+                      onClick={clearFilters}
+                    >
+                      Clear filters
+                    </button>
                   </td>
                 </tr>
               ) : null}
@@ -262,7 +291,8 @@ export function EmployeesView() {
                       {e.fullName}
                     </Link>
                     <small>
-                      {e.jobTitle} · {e.employeeCode}
+                      {e.jobTitle}
+                      <span className={tableStyles.hideSm}> · {e.employeeCode}</span>
                     </small>
                   </td>
                   <td className={tableStyles.hideSm}>{e.department}</td>
@@ -288,41 +318,43 @@ export function EmployeesView() {
           </table>
         </div>
 
-        <nav className={styles.pager} aria-label="Pagination">
-          <label className={`mono muted ${styles.pageSize}`}>
-            Rows
-            <select
-              className="input"
-              value={query.pageSize}
-              onChange={(e) => update({ pageSize: Number(e.target.value) })}
-            >
-              {[25, 50, 100].map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-          </label>
-          <span className="mono muted">
-            Page {query.page} of {count(pages)}
-          </span>
-          <div className={styles.pageButtons}>
-            <button
-              type="button"
-              className="btn btn-ghost"
-              disabled={query.page <= 1}
-              onClick={() => update({ page: query.page - 1 })}
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className="btn btn-ghost"
-              disabled={query.page >= pages}
-              onClick={() => update({ page: query.page + 1 })}
-            >
-              Next
-            </button>
-          </div>
-        </nav>
+        {list.data && list.data.total > 0 ? (
+          <nav className={styles.pager} aria-label="Pagination">
+            <label className={`mono muted ${styles.pageSize}`}>
+              Rows
+              <select
+                className="input"
+                value={query.pageSize}
+                onChange={(e) => update({ pageSize: Number(e.target.value) })}
+              >
+                {[25, 50, 100].map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </label>
+            <span className="mono muted">
+              Page {query.page} of {count(pages)}
+            </span>
+            <div className={styles.pageButtons}>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                disabled={query.page <= 1}
+                onClick={() => update({ page: query.page - 1 })}
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                disabled={query.page >= pages}
+                onClick={() => update({ page: query.page + 1 })}
+              >
+                Next
+              </button>
+            </div>
+          </nav>
+        ) : null}
       </Plate>
 
       <Dialog

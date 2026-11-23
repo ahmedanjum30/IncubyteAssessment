@@ -124,6 +124,12 @@
   transform: none;
 }
 
+.tipTitle {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
 .tip dl {
   display: grid;
   grid-template-columns: auto auto;
@@ -147,6 +153,25 @@
   display: flex;
   justify-content: space-between;
   margin: 0 10px;
+}
+
+.skeleton span {
+  height: 10px;
+  margin: 0 10px;
+  background: linear-gradient(90deg, var(--hair-soft), var(--sheet), var(--hair-soft));
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+.skeleton span:first-child {
+  margin-left: 6px;
+  width: 70%;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
 }
 
 @media (max-width: 640px) {

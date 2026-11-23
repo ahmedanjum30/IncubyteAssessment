@@ -26,25 +26,6 @@
   width: min(720px, calc(100vw - 32px));
 }
 
-.reg {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background:
-    linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat,
-    linear-gradient(var(--ink), var(--ink)) center / 100% 1px no-repeat;
-}
-
-.tl {
-  top: 6px;
-  left: 6px;
-}
-
-.br {
-  bottom: 6px;
-  right: 6px;
-}
-
 .head {
   display: flex;
   justify-content: space-between;

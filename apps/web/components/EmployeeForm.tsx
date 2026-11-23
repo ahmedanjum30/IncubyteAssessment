@@ -191,7 +191,7 @@ export function EmployeeForm({ employee, onDone, onCancel }: EmployeeFormProps) 
         {label('salary', `Annual base salary (${country.currency})`)}
         <input {...fieldProps('salary')} inputMode="decimal" autoComplete="off" />
         {error('salary') ?? (
-          <span className="muted num">
+          <span className="muted">
             Band {money(band.min, country.currency)} – {money(band.max, country.currency)}
           </span>
         )}

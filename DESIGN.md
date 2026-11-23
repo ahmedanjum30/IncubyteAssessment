@@ -222,7 +222,7 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 ### Inputs and dialogs
 
 - Inputs: 1px hairline border, white fill, zero radius, 10px 12px padding. Focus turns the border ink and adds the periwinkle ring. Errors show Error Red text beneath the field.
-- Dialogs: a centred sheet-coloured panel with hairline border and plate crosshairs over a 40% ink scrim. They fade and rise 8px in 0.25s.
+- Dialogs: a centred sheet-coloured panel with a hairline border over a 40% ink scrim. Dialogs have no crosshair marks; those belong to plates only. They fade and rise 8px in 0.25s.
 
 ## Motion
 

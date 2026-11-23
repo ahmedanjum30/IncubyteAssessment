@@ -15,7 +15,7 @@ export interface BoxPlotRow {
   p90: number;
   bandMin: number | null;
   attention: boolean;
-  detail?: string;
+  meta?: string;
 }
 
 interface BoxPlotProps {
@@ -23,6 +23,20 @@ interface BoxPlotProps {
   selected?: string | null;
   onSelect?: (key: string | null) => void;
   showBand?: boolean;
+}
+
+export function BoxPlotSkeleton({ rows = 12 }: { rows?: number }) {
+  return (
+    <ul className={styles.rows} aria-hidden="true">
+      {Array.from({ length: rows }, (_, i) => (
+        <li key={i} className={`${styles.row} ${styles.skeleton}`}>
+          <span />
+          <span />
+          <span />
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 export function BoxPlot({ rows, selected, onSelect, showBand = false }: BoxPlotProps) {
@@ -77,7 +91,8 @@ export function BoxPlot({ rows, selected, onSelect, showBand = false }: BoxPlotP
                 <span className={`num ${styles.value}`}>{usdCompact(r.median)}</span>
               </button>
               <div className={styles.tip} role="presentation">
-                <span className="mono">{r.detail ?? r.label}</span>
+                <strong className={styles.tipTitle}>{r.label}</strong>
+                {r.meta ? <span className="mono">{r.meta}</span> : null}
                 <dl>
                   <dt>P90</dt>
                   <dd>{usdCompact(r.p90)}</dd>

@@ -25,6 +25,10 @@
   border-bottom: 1px solid var(--hair);
 }
 
+.filterToggle {
+  display: none;
+}
+
 .stale {
   opacity: 0.6;
   transition: opacity 0.15s;
@@ -66,7 +70,22 @@
 
 @media (max-width: 640px) {
   .filters {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+  .search {
+    grid-column: 1;
+  }
+  .filterToggle {
+    display: inline-flex;
+  }
+  .filters > label:not(.search) {
+    display: none;
+    grid-column: 1 / -1;
+  }
+  .filters[data-open] > label:not(.search) {
+    display: grid;
+    animation: rise 0.3s var(--ease-out) both;
   }
   .head {
     align-items: center;

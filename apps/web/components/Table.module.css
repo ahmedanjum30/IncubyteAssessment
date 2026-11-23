@@ -41,6 +41,7 @@
 
 .n {
   text-align: right !important;
+  font-variant-numeric: tabular-nums;
 }
 
 .gap {
@@ -109,6 +110,10 @@
   to {
     background-position: -200% 0;
   }
+}
+
+.emptyAction {
+  margin-left: 6px;
 }
 
 @media (max-width: 640px) {

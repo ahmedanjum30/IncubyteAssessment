@@ -21,8 +21,6 @@ export function Dialog({ open, onOpenChange, title, description, children, wide 
           className={`${styles.content} ${wide ? styles.wide : ''}`}
           {...(description ? {} : { 'aria-describedby': undefined })}
         >
-          <span className={`${styles.reg} ${styles.tl}`} aria-hidden="true" />
-          <span className={`${styles.reg} ${styles.br}`} aria-hidden="true" />
           <div className={styles.head}>
             <RadixDialog.Title className={styles.title}>{title}</RadixDialog.Title>
             <RadixDialog.Close className={styles.close} aria-label="Close">
