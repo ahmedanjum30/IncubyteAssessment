@@ -1,0 +1,12 @@
+**/node_modules
+**/.next
+**/dist
+**/coverage
+**/*.tsbuildinfo
+.git
+.impeccable
+design
+docs
+*.pdf
+.env
+.env.*
