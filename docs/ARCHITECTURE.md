@@ -86,6 +86,25 @@ What makes it fast:
 
 **When it would need to change:** around 1M+ rows, add keyset pagination and a materialized view for insights, refreshed when salaries change.
 
+## Security
+
+| Concern            | Control                                                                                                                                                                                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Abuse and spamming | `@fastify/rate-limit` per client IP: 300 reads/min, 30 writes/min, counted separately. A client that keeps going after being limited gets **403 (temporary ban)** for the rest of the window. Limits are set through env vars.                                      |
+| Real client IP     | Caddy overwrites `X-Forwarded-For` with the connecting IP. The API trusts it only when `TRUST_PROXY=true` (set in compose, where Caddy is the only route in). Behind Cloudflare, add Cloudflare's ranges to Caddy `trusted_proxies`.                                |
+| Injection          | All SQL is parameterised (postgres.js tagged templates). Sort columns come from an allow-list, and `ILIKE` wildcards in search are escaped.                                                                                                                         |
+| Input              | zod validates every body and query, and unknown fields are stripped (no mass assignment). Ids must be positive 32-bit integers. Bodies are capped at 64 KB in the API and 1 MB at Caddy.                                                                            |
+| Slow queries       | Postgres `statement_timeout` is 5 s per statement. Page size is capped at 100.                                                                                                                                                                                      |
+| Errors             | Expected failures return 400/404/409/413/429/403 with a clear message. Unexpected errors return a generic 500 and never leak SQL or stack traces.                                                                                                                   |
+| Browser            | CSP (`default-src 'self'`, `frame-ancestors 'none'`, `object-src 'none'`), `nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, HSTS. React escapes all output, and `dangerouslySetInnerHTML` is never used. CORS only allows `WEB_ORIGIN`. |
+| Secrets            | Config comes from env only. Compose refuses to start without `POSTGRES_PASSWORD` (no default password). `.env` is git-ignored.                                                                                                                                      |
+| Containers         | Non-root users, `no-new-privileges`, all Linux capabilities dropped. Postgres binds to localhost only.                                                                                                                                                              |
+| Dependencies       | `npm audit --omit=dev` reports 0 vulnerabilities. CI runs on every push.                                                                                                                                                                                            |
+
+**Known gap: authentication.** Anyone who can reach the URL can read and edit salary data. That is acceptable for a demo with synthetic data, but it must be closed before real data goes in. The recommended route is Cloudflare Access (SSO) in front of the site, which needs no code changes. The alternative is Caddy `basic_auth` on a private deployment.
+
+`script-src` still allows `'unsafe-inline'` because Next.js injects inline bootstrap scripts. Moving to a nonce-based CSP would make every page dynamic, so I kept the static pages and their speed.
+
 ## Deployment: Docker on the Oracle free tier
 
 - Target: Oracle Cloud Always Free **Ampere A1 (ARM64)**.

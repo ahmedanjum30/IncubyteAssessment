@@ -42,6 +42,28 @@ Every one of these was caught by a check I asked for (lint, type-check, tests, t
 | `react-hooks` workaround with a ref written during render | oxlint `react(refs)` error.                                                               | Replaced it with React 19's `useEffectEvent`.                                                                 |
 | `role="search"` / `role="group"`                          | oxlint a11y: prefer semantic elements.                                                    | Used `<search>` and `<fieldset>` with a visually hidden `<legend>`.                                           |
 
+### Polish and security pass
+
+Requested: "/impeccable polish", "do a security check if we have missed anything", "add spamming bans, rate limit". The UI was driven through Edge's DevTools protocol (dialogs, hover, validation, true 390px phone width), and the API was probed with crafted requests.
+
+| Found                                                                    | Fix                                                                                                                                                                        |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /api/employees/99999999999` returned 500                            | `IdPipe` rejects anything that isn't a positive 32-bit integer (400). Tested with five bad ids.                                                                            |
+| A 2 MB JSON body hung the connection                                     | API `bodyLimit` 64 KB and Caddy `max_size 1MB`. It now returns 413.                                                                                                        |
+| No rate limiting                                                         | Per-IP limits with separate read and write budgets, plus a temporary 403 ban for clients that keep hammering. Tested at the unit level and with a live flood of 40 writes. |
+| The rate limiter logged every 429 as an ERROR                            | It returned plain objects, which Nest treats as unknown errors. It now returns `HttpException`, and the logs stay quiet.                                                   |
+| Default database password `acme` in compose                              | Compose now requires `POSTGRES_PASSWORD`.                                                                                                                                  |
+| No CSP or Permissions-Policy, and API responses had no hardening headers | CSP on pages. Caddy adds `nosniff`, frame, referrer and permissions headers to every response. Containers drop capabilities.                                               |
+| Employee page overflowed to 473px on phones                              | Twelve 40px grid gaps forced the width. The page now collapses to one column below 1100px.                                                                                 |
+| Brand wrapped and nav clipped at 390px                                   | Brand set to no-wrap, with a tighter nav on phones.                                                                                                                        |
+| Five stacked filter selects filled a phone screen                        | On phones the filters sit behind a "Filters (n)" toggle.                                                                                                                   |
+| Tabular numerals widened punctuation in sentences ("filters .")          | Tabular digits are now applied only to numeric cells.                                                                                                                      |
+| Empty search was a dead end with a useless pager                         | Added a "Clear filters" action and hid the pager when there are no results.                                                                                                |
+| Box plot showed a `$0–$1` axis while loading                             | Added a shimmer skeleton until data arrives.                                                                                                                               |
+| Tooltip title wrapped awkwardly in mono                                  | The country name is the title line, with the counts on a mono line below.                                                                                                  |
+| Date input was taller than the other fields                              | All inputs fixed at 42px.                                                                                                                                                  |
+| "+" crosshairs on dialogs (user feedback)                                | Removed. Crosshairs stay on plates only, and the rule is recorded in `DESIGN.md`.                                                                                          |
+
 ## What I kept for myself
 
 - Product scope and the "left out" list in the requirements.

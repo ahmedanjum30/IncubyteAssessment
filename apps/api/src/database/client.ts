@@ -4,12 +4,13 @@ export type Sql = postgres.Sql<Record<string, unknown>>;
 
 export const SQL = Symbol('SQL');
 
-export function createSql(url: string, max = 10): Sql {
+export function createSql(url: string, max = 10, statementTimeoutMs?: number): Sql {
   return postgres(url, {
     max,
     idle_timeout: 30,
     connect_timeout: 10,
     onnotice: () => undefined,
+    connection: statementTimeoutMs ? { statement_timeout: statementTimeoutMs } : {},
     transform: postgres.camel,
     types: {
       numeric: {

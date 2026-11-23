@@ -40,7 +40,7 @@ design/         Approved UI prototype
 ## Run it with Docker (whole stack)
 
 ```bash
-cp .env.example .env              # change POSTGRES_PASSWORD for anything real
+cp .env.example .env              # set POSTGRES_PASSWORD (compose refuses to start without one)
 docker compose up -d --build --wait
 docker compose exec api node apps/api/dist/database/seed.js   # 10,000 employees, ~1s
 ```
@@ -69,10 +69,10 @@ npm test                          # shared + api + web
 TEST_DATABASE_URL=postgres://acme:acme@localhost:5433/acme_pay_test npm test   # also runs the PostgreSQL integration suite
 ```
 
-There are 42 tests in total. They cover the behaviour that matters rather than every line:
+There are 45 tests in total. They cover the behaviour that matters rather than every line:
 
 - **Shared:** pay rules (band status, gap, USD conversion) and the validation schemas.
-- **API:** service rules (salary history, relocation, duplicate email, not found), the HTTP contract (query parsing, validation errors), the seed generator (deterministic, unique, realistic band spread), and SQL against real PostgreSQL (filters, search, history, percentile consistency).
+- **API:** rate limiting and temporary bans, id validation, service rules (salary history, relocation, duplicate email, not found), the HTTP contract (query parsing, validation errors), the seed generator (deterministic, unique, realistic band spread), and SQL against real PostgreSQL (filters, search, history, percentile consistency).
 - **Web:** form behaviour (client validation, reason only when the salary changes, sends only changed fields), URL state, formatting and chart scale.
 
 CI runs all of it against a Postgres service and builds both images for amd64 and arm64.
@@ -95,7 +95,7 @@ All endpoints are under `/api`.
 | GET    | `/meta`                                                                  | Countries, currencies, FX, departments, job titles                     |
 | GET    | `/health`                                                                | Liveness, including a database ping                                    |
 
-Validation errors return `400` with `issues: [{ path, message }]`, a duplicate email returns `409`, and an unknown id returns `404`.
+Validation errors return `400` with `issues: [{ path, message }]`, a duplicate email returns `409`, and an unknown id returns `404`. Clients are rate-limited per IP (300 reads and 30 writes a minute); a client that keeps going after hitting the limit is blocked with `403` for the rest of the minute. See the security section in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Deploy to the Oracle free tier
 

@@ -1,15 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  Param,
-  ParseIntPipe,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query } from '@nestjs/common';
 import {
   employeeInputSchema,
   employeeListQuerySchema,
@@ -18,6 +7,7 @@ import {
   type EmployeeListQuery,
   type EmployeeUpdate,
 } from '@acme/shared';
+import { IdPipe } from '../common/id.pipe.js';
 import { ZodPipe } from '../common/zod.pipe.js';
 import { EmployeesService } from './employees.service.js';
 
@@ -31,7 +21,7 @@ export class EmployeesController {
   }
 
   @Get(':id')
-  get(@Param('id', ParseIntPipe) id: number) {
+  get(@Param('id', IdPipe) id: number) {
     return this.employees.get(id);
   }
 
@@ -42,7 +32,7 @@ export class EmployeesController {
 
   @Patch(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', IdPipe) id: number,
     @Body(new ZodPipe(employeeUpdateSchema)) body: EmployeeUpdate,
   ) {
     return this.employees.update(id, body);
@@ -50,7 +40,7 @@ export class EmployeesController {
 
   @Delete(':id')
   @HttpCode(204)
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id', IdPipe) id: number) {
     await this.employees.remove(id);
   }
 }

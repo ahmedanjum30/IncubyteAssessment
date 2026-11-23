@@ -71,9 +71,11 @@ describe('EmployeesController (HTTP contract)', () => {
     expect(paths).toEqual(expect.arrayContaining(['fullName', 'email', 'salary', 'countryCode']));
   });
 
-  it('rejects a non-numeric id before reaching the service', async () => {
-    const res = await app.inject({ method: 'DELETE', url: '/api/employees/abc' });
-    expect(res.statusCode).toBe(400);
+  it('rejects ids that are not positive 32-bit integers before reaching the service', async () => {
+    for (const id of ['abc', '0', '-1', '1.5', '99999999999']) {
+      const res = await app.inject({ method: 'DELETE', url: `/api/employees/${id}` });
+      expect(res.statusCode).toBe(400);
+    }
     expect(service.remove).not.toHaveBeenCalled();
   });
 });

@@ -17,7 +17,7 @@ import { migrate, syncReferenceData } from './migrate.js';
       provide: SQL,
       useFactory: () => {
         const config = loadConfig();
-        return createSql(config.DATABASE_URL, config.DB_POOL_MAX);
+        return createSql(config.DATABASE_URL, config.DB_POOL_MAX, config.DB_STATEMENT_TIMEOUT_MS);
       },
     },
   ],
