@@ -79,7 +79,7 @@ What makes it fast:
 - **Indexes** on `(country_code, department, level)` (filters and the band join), `department`, `job_title`, `(full_name, id)` for sorting, and a **trigram GIN index** for `ILIKE` search.
 - The list query and its `count(*)` run **in parallel**. Page size is capped at 100, so no request can pull the whole table.
 - Insights are **single aggregate queries**. Nothing loops over employees in Node.
-- On the client: the next page is **prefetched**, the search input is **debounced** (250 ms), in-flight requests are **cancelled** through `AbortSignal` when filters change, and the previous data stays on screen while the next loads.
+- On the client: the next page is **prefetched**, the search input is **debounced** (400 ms, Enter searches immediately), in-flight requests are **cancelled** through `AbortSignal` when filters change, and the previous data stays on screen while the next loads.
 - **Fonts are self-hosted** by `next/font` (no layout shift, no third-party request). Styling uses plain CSS modules (no runtime CSS-in-JS), and the chart is CSS rather than a chart library. Animation uses CSS transitions, never JavaScript loops, except the stat count-up, which uses `requestAnimationFrame`.
 - Caddy compresses responses with zstd/gzip. The overview HTML is about 3.4 KB on the wire.
 - Postgres is tuned modestly for the 24 GB Ampere VM (`shared_buffers=256MB`, `work_mem=16MB`).

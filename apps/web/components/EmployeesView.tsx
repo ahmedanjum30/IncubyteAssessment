@@ -30,6 +30,8 @@ const COLUMNS: { field: SortField | null; label: string; numeric?: boolean; hide
   { field: 'gap', label: 'Band', numeric: true },
 ];
 
+const SEARCH_DEBOUNCE_MS = 400;
+
 export function EmployeesView() {
   const router = useRouter();
   const pathname = usePathname();
@@ -54,7 +56,7 @@ export function EmployeesView() {
   useEffect(() => {
     const term = search.trim() || undefined;
     if (term === query.q) return;
-    const id = setTimeout(() => applySearch(term), 250);
+    const id = setTimeout(() => applySearch(term), SEARCH_DEBOUNCE_MS);
     return () => clearTimeout(id);
   }, [search, query.q]);
 
@@ -108,6 +110,9 @@ export function EmployeesView() {
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') update({ q: search.trim() || undefined });
+            }}
             placeholder="Name, email or employee code"
           />
         </label>
