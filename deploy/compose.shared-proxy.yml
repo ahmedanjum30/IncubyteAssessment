@@ -1,23 +1,19 @@
 # Run ACME Pay behind a reverse proxy that already owns ports 80/443 on the host.
 #   docker compose -f docker-compose.yml -f deploy/compose.shared-proxy.yml up -d --build
 # Set BASE_PATH (e.g. /acme-pay) and EDGE_NETWORK (the proxy's Docker network) in .env,
-# then add the routes from deploy/Caddyfile.path-route to that proxy.
+# then add deploy/Caddyfile.shared-hub to that proxy's site block.
+# Service names are prefixed (acme-*) because Docker registers them as DNS names on the
+# shared network; a generic name like "web" would shadow the other project's service.
 
 services:
   proxy:
     scale: 0
 
-  api:
-    networks:
-      default:
-      edge:
-        aliases: [acme-pay-api]
+  acme-api:
+    networks: [default, edge]
 
-  web:
-    networks:
-      default:
-      edge:
-        aliases: [acme-pay-web]
+  acme-web:
+    networks: [default, edge]
 
 networks:
   edge:

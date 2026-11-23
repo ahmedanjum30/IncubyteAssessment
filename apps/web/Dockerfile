@@ -9,7 +9,7 @@ RUN --mount=type=cache,target=/root/.npm npm ci -w @acme/shared -w @acme/web --i
 COPY tsconfig.base.json ./
 COPY packages/shared packages/shared
 COPY apps/web apps/web
-ARG API_URL=http://api:3001
+ARG API_URL=http://acme-api:3001
 ARG BASE_PATH=
 ENV API_URL=$API_URL BASE_PATH=$BASE_PATH NEXT_TELEMETRY_DISABLED=1
 RUN npm run build -w @acme/shared && npm run build -w @acme/web

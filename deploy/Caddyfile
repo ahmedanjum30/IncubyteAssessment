@@ -16,10 +16,10 @@
 	}
 
 	handle /api/* {
-		reverse_proxy api:3001
+		reverse_proxy acme-api:3001
 	}
 
 	handle {
-		reverse_proxy web:3000
+		reverse_proxy acme-web:3000
 	}
 }

@@ -10,7 +10,7 @@ x-hardened: &hardened
     - ALL
 
 services:
-  db:
+  acme-db:
     <<: *restart
     image: postgres:17-alpine
     environment:
@@ -37,13 +37,13 @@ services:
       timeout: 3s
       retries: 20
 
-  api:
+  acme-api:
     <<: [*restart, *hardened]
     build:
       context: .
       dockerfile: apps/api/Dockerfile
     environment:
-      DATABASE_URL: postgres://${POSTGRES_USER:-acme}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:-acme_pay}
+      DATABASE_URL: postgres://${POSTGRES_USER:-acme}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@acme-db:5432/${POSTGRES_DB:-acme_pay}
       API_PORT: 3001
       TRUST_PROXY: 'true'
       RATE_LIMIT_READS: ${RATE_LIMIT_READS:-300}
@@ -51,7 +51,7 @@ services:
       RATE_LIMIT_BAN_AFTER: ${RATE_LIMIT_BAN_AFTER:-5}
       WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost}
     depends_on:
-      db:
+      acme-db:
         condition: service_healthy
     healthcheck:
       test:
@@ -65,7 +65,7 @@ services:
       timeout: 3s
       retries: 6
 
-  web:
+  acme-web:
     <<: [*restart, *hardened]
     build:
       context: .
@@ -73,9 +73,9 @@ services:
       args:
         BASE_PATH: ${BASE_PATH:-}
     environment:
-      API_URL: http://api:3001
+      API_URL: http://acme-api:3001
     depends_on:
-      api:
+      acme-api:
         condition: service_healthy
 
   proxy:
@@ -90,8 +90,8 @@ services:
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
     depends_on:
-      - web
-      - api
+      - acme-web
+      - acme-api
 
 volumes:
   pgdata:

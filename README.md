@@ -42,7 +42,7 @@ design/         Approved UI prototype
 ```bash
 cp .env.example .env              # set POSTGRES_PASSWORD (compose refuses to start without one)
 docker compose up -d --build --wait
-docker compose exec api node apps/api/dist/database/seed.js   # 10,000 employees, ~1s
+docker compose exec acme-api node apps/api/dist/database/seed.js   # 10,000 employees, ~1s
 ```
 
 Open http://localhost. If port 80 is taken, set `HTTP_PORT=8088` in `.env`.

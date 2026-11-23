@@ -13,7 +13,7 @@
     "build": "npm run build -w @acme/shared && npm run build -w @acme/api && npm run build -w @acme/web",
     "dev:api": "npm run dev -w @acme/api",
     "dev:web": "npm run dev -w @acme/web",
-    "db:up": "docker compose up -d db",
+    "db:up": "docker compose up -d acme-db",
     "db:seed": "npm run seed -w @acme/api",
     "lint": "oxlint",
     "typecheck": "npm run typecheck --workspaces --if-present",
