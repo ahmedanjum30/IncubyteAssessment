@@ -129,13 +129,13 @@ An ink-on-paper palette with a single attention colour.
 
 ### Hierarchy
 - **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): the page headline, one per screen.
-- **Stat** (400, 34px, 1.1): figures in the stats row, tabular numerals.
+- **Stat** (400, 34px, 1.1): figures in the stats row, proportional numerals.
 - **Title** (500, 19px): plate titles.
 - **Body** (400, 15px, 1.5): everything else, prose capped at 62ch.
 - **Label** (Azeret Mono 400, 11px, 0.14em, uppercase): plate meta, stat labels, tokens, stamps, axis ticks.
 
 ### Named Rules
-**The Tabular Rule.** Every number uses `font-variant-numeric: tabular-nums`. Money shows its local currency first and the USD equivalent beneath in Second Ink.
+**The Tabular Rule.** Numbers in tables and charts use `font-variant-numeric: tabular-nums` so columns align. Display figures (the stats row) keep proportional numerals, because tabular commas open visible gaps at 34px. Money shows its local currency first and the USD equivalent beneath in Second Ink.
 
 ## Layout
 
@@ -188,7 +188,7 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep every number tabular and every money value in local currency with USD beneath it.
+- **Do** keep table and chart numbers tabular, and show every money value in local currency with USD beneath it.
 - **Do** use periwinkle only for states that need a decision.
 - **Do** use standard controls (buttons, selects, inputs, tables) in the plate vocabulary.
 

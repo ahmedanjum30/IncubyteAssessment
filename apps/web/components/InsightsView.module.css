@@ -1,0 +1,119 @@
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 34px var(--gutter) 56px;
+  display: grid;
+  gap: 24px;
+}
+
+.page > * {
+  min-width: 0;
+}
+
+.head h1 {
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
+}
+
+.head p {
+  max-width: 62ch;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 240px));
+  gap: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--hair);
+}
+
+.stats > div {
+  padding: 14px 18px 16px 0;
+  margin-right: 18px;
+  border-right: 1px solid var(--hair);
+}
+
+.stats > div:last-child {
+  border-right: 0;
+}
+
+.stats b {
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+
+.attention b {
+  color: var(--peri);
+}
+
+.stale {
+  opacity: 0.6;
+}
+
+.rangeCol {
+  width: 38%;
+  min-width: 220px;
+}
+
+.axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.range {
+  position: relative;
+  display: block;
+  height: 20px;
+  margin-top: 2px;
+}
+
+.span {
+  position: absolute;
+  top: 9px;
+  height: 2px;
+  background: var(--ink);
+  transform-origin: left;
+  animation: grow 0.6s var(--ease-out) both;
+}
+
+.median {
+  position: absolute;
+  top: 3px;
+  width: 9px;
+  height: 14px;
+  margin-left: -4.5px;
+  background: #fff;
+  border: 1px solid var(--ink);
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

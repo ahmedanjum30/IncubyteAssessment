@@ -1,0 +1,52 @@
+.fieldset {
+  border: 0;
+  min-width: 0;
+}
+
+.tokens {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 0;
+}
+
+.slab {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  background: var(--ink);
+  transition:
+    transform 0.45s var(--ease-out),
+    width 0.45s var(--ease-out);
+}
+
+.tok {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  min-height: 36px;
+  padding: 8px 12px;
+  border: 1px solid var(--hair);
+  background: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    color 0.1s,
+    border-color 0.1s;
+}
+
+.tok:hover {
+  border-color: var(--ink);
+}
+
+.tok[aria-pressed='true'] {
+  color: var(--sheet);
+  border-color: var(--ink);
+  background: transparent;
+}

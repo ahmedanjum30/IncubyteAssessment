@@ -1,0 +1,165 @@
+.plot {
+  --label: 128px;
+  --value: 64px;
+}
+
+.rows {
+  list-style: none;
+}
+
+.item {
+  position: relative;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--label) 1fr var(--value);
+  align-items: center;
+  width: 100%;
+  height: 34px;
+  text-align: left;
+  border-bottom: 1px solid var(--hair-soft);
+  transition: background 0.15s;
+}
+
+.row:hover,
+.row:focus-visible,
+.row[aria-pressed='true'] {
+  background: rgba(220, 221, 243, 0.3);
+}
+
+.row[aria-pressed='true'] {
+  box-shadow: inset 2px 0 0 var(--peri);
+}
+
+.label {
+  font-size: 14px;
+  padding-left: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.track {
+  position: relative;
+  height: 34px;
+  margin: 0 10px;
+}
+
+.track span {
+  position: absolute;
+  display: block;
+  transition:
+    left 0.7s var(--ease-out),
+    width 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+.whisker {
+  top: 16.5px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.box {
+  top: 10px;
+  height: 14px;
+  border: 1px solid var(--ink);
+  background: #fff;
+}
+
+.median {
+  top: 7px;
+  width: 2px;
+  height: 20px;
+  margin-left: -1px;
+  background: var(--ink);
+}
+
+.band {
+  top: 0;
+  height: 34px;
+  background: rgba(75, 79, 168, 0.12);
+  box-shadow:
+    inset 1px 0 0 var(--peri),
+    inset -1px 0 0 var(--peri);
+}
+
+.row[data-attention] .box {
+  background: var(--seal);
+  border-color: var(--peri);
+}
+
+.row[data-attention] .median {
+  background: var(--peri);
+}
+
+.tip {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 4px);
+  left: calc(var(--label) + 40px);
+  min-width: 210px;
+  padding: 10px 12px;
+  background: var(--ink);
+  color: var(--sheet);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.15s,
+    transform 0.2s var(--ease-std);
+}
+
+.item:hover .tip,
+.item:focus-within .tip {
+  opacity: 1;
+  transform: none;
+}
+
+.tip dl {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2px 16px;
+  margin-top: 6px;
+  font: 12px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tip dd {
+  text-align: right;
+}
+
+.axis {
+  display: grid;
+  grid-template-columns: var(--label) 1fr var(--value);
+  margin-top: 8px;
+}
+
+.axis div {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 10px;
+}
+
+@media (max-width: 640px) {
+  .plot {
+    --label: 92px;
+    --value: 52px;
+  }
+  .tip {
+    left: 12px;
+  }
+}
+
+@media (hover: none) {
+  .tip {
+    display: none;
+  }
+}

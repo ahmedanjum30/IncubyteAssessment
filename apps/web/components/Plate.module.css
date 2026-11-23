@@ -1,0 +1,90 @@
+.plate {
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--hair);
+  background: var(--wash);
+  padding: 20px 22px 22px;
+  animation: ink 0.8s var(--ease-out) both;
+}
+
+.reg {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 100% 1px no-repeat;
+}
+
+.reg::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+}
+
+.tl {
+  top: -8px;
+  left: -8px;
+  animation: regTl 0.9s var(--ease-out) both;
+}
+
+.br {
+  bottom: -8px;
+  right: -8px;
+  animation: regBr 0.9s var(--ease-out) both;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.head h2 {
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+
+.meta {
+  text-align: right;
+}
+
+@keyframes ink {
+  from {
+    background: transparent;
+    border-color: transparent;
+  }
+}
+
+@keyframes regTl {
+  from {
+    transform: translate(-10px, -6px);
+    opacity: 0;
+  }
+}
+
+@keyframes regBr {
+  from {
+    transform: translate(10px, 6px);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .plate {
+    padding: 16px 14px;
+  }
+  .head {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta {
+    text-align: left;
+  }
+}

@@ -1,0 +1,234 @@
+:root {
+  --sheet: #f5f4f6;
+  --warm: #faf6f5;
+  --green: #eef3ef;
+  --ink: #16181a;
+  --ink-2: #55585d;
+  --hair: #c9c7c4;
+  --hair-soft: #e3e1de;
+  --seal: #dcddf3;
+  --peri: #4b4fa8;
+  --peri-ink: #34377f;
+  --danger: #a3261a;
+  --wash: rgba(255, 255, 255, 0.55);
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-std: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: 40px;
+  --font-sans: var(--font-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-azeret), ui-monospace, monospace;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--sheet);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  color: var(--ink);
+  font: 15px/1.5 var(--font-sans);
+  background:
+    radial-gradient(1200px 700px at -10% -10%, var(--warm), transparent 60%),
+    radial-gradient(1000px 700px at 110% 110%, var(--green), transparent 60%),
+    var(--sheet);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--seal);
+  color: var(--peri-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--peri);
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.muted {
+  color: var(--ink-2);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.1s,
+    color 0.1s;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--sheet);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--sheet);
+  color: var(--ink);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--sheet);
+}
+
+.btn-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--danger);
+  color: #fff;
+}
+
+.link {
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+.link:hover {
+  color: var(--peri-ink);
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field > span {
+  color: var(--ink-2);
+}
+
+.input {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 0;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.input:hover {
+  border-color: var(--ink-2);
+}
+
+.input:focus-visible {
+  border-color: var(--ink);
+  outline-offset: 1px;
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+select.input {
+  appearance: none;
+  padding-right: 34px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--ink) 50%) calc(100% - 17px) 50% / 5px 5px no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--ink) 50%) calc(100% - 12px) 50% / 5px 5px no-repeat,
+    #fff;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.stamp {
+  display: inline-block;
+  border: 1px solid var(--peri);
+  color: var(--peri-ink);
+  background: var(--seal);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

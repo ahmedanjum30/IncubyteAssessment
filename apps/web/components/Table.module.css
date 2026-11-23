@@ -1,0 +1,122 @@
+.wrap {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--ink);
+  font-weight: 400;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--hair-soft);
+  vertical-align: top;
+}
+
+.table td small {
+  display: block;
+  color: var(--ink-2);
+  font-size: 12px;
+}
+
+.table tbody tr {
+  position: relative;
+  transition: background 0.15s;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.n {
+  text-align: right !important;
+}
+
+.gap {
+  color: var(--peri-ink);
+}
+
+.empty {
+  padding: 28px 8px !important;
+  color: var(--ink-2);
+}
+
+.enter {
+  animation: rise 0.45s var(--ease-out) both;
+}
+
+.rowLink {
+  text-decoration: none;
+}
+
+.rowLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.rowLink:hover {
+  color: var(--peri-ink);
+}
+
+.rowLink:focus-visible {
+  outline: none;
+}
+
+.rowLink:focus-visible::after {
+  outline: 2px solid var(--peri);
+  outline-offset: -2px;
+}
+
+.sortBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  color: inherit;
+}
+
+.sortBtn:hover {
+  color: var(--ink);
+}
+
+.sortBtn[data-active] {
+  color: var(--ink);
+}
+
+.skeleton td {
+  color: transparent;
+}
+
+.skeleton td::before {
+  content: '';
+  display: block;
+  height: 12px;
+  width: 70%;
+  background: linear-gradient(90deg, var(--hair-soft), #eceae7, var(--hair-soft));
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hideSm {
+    display: none;
+  }
+}

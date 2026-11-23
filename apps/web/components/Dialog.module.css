@@ -1,0 +1,88 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(22, 24, 26, 0.4);
+  animation: fade 0.2s ease-out;
+}
+
+.content {
+  position: fixed;
+  z-index: 41;
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  padding: 24px 24px 26px;
+  background: var(--sheet);
+  border: 1px solid var(--hair);
+  box-shadow: 0 24px 60px -20px rgba(22, 24, 26, 0.35);
+  animation: rise-in 0.25s var(--ease-std);
+}
+
+.wide {
+  width: min(720px, calc(100vw - 32px));
+}
+
+.reg {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 1px 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 100% 1px no-repeat;
+}
+
+.tl {
+  top: 6px;
+  left: 6px;
+}
+
+.br {
+  bottom: 6px;
+  right: 6px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+}
+
+.close:hover {
+  border-color: var(--ink);
+}
+
+.description {
+  margin-top: 6px;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px));
+  }
+}
