@@ -28,12 +28,13 @@
   background: rgba(220, 221, 243, 0.3);
 }
 
-.row[aria-pressed='true'] {
-  box-shadow: inset 2px 0 0 var(--peri);
+.row[aria-pressed='true'] .label {
+  color: var(--peri-ink);
+  font-weight: 500;
 }
 
 .label {
-  font-size: 14px;
+  font-size: var(--fs-table);
   padding-left: 6px;
   white-space: nowrap;
   overflow: hidden;
@@ -43,7 +44,7 @@
 .value {
   text-align: right;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: var(--fs-small);
 }
 
 .track {
@@ -71,7 +72,7 @@
   top: 10px;
   height: 14px;
   border: 1px solid var(--ink);
-  background: #fff;
+  background: var(--paper);
 }
 
 .median {
@@ -128,7 +129,7 @@
   grid-template-columns: auto auto;
   gap: 2px 16px;
   margin-top: 6px;
-  font: 12px var(--font-mono);
+  font: var(--fs-small) var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 

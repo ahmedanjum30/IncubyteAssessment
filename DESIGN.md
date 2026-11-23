@@ -13,6 +13,7 @@ colors:
   periwinkle: "#4B4FA8"
   periwinkle-ink: "#34377F"
   danger: "#A3261A"
+  paper: "#FFFFFF"
 typography:
   display:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
@@ -20,6 +21,17 @@ typography:
     fontWeight: 400
     lineHeight: 1.02
     letterSpacing: "-0.025em"
+  headline:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "clamp(34px, 3.8vw, 52px)"
+    fontWeight: 400
+    lineHeight: 1.03
+    letterSpacing: "-0.025em"
+  dialog:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "28px"
+    fontWeight: 400
+    letterSpacing: "-0.02em"
   stat:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
     fontSize: "34px"
@@ -32,11 +44,23 @@ typography:
     fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "-0.01em"
+  brand:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "17px"
+    fontWeight: 600
   body:
     fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.5
+  table:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "14px"
+    fontWeight: 400
+  small:
+    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
   label:
     fontFamily: "Azeret Mono, ui-monospace, monospace"
     fontSize: "11px"
@@ -116,6 +140,7 @@ An ink-on-paper palette with a single attention colour.
 - **Second Ink** (#55585D): secondary text and labels (≥ 6:1 on the sheet).
 - **Hairline** (#C9C7C4): plate borders and section rules. **Soft Hairline** (#E3E1DE): row dividers.
 - **Error Red** (#A3261A): form validation errors and destructive confirmation only.
+- **Paper** (#FFFFFF): inputs, box-plot boxes and other figures that sit on the white-washed plates.
 
 ### Named Rules
 **The One Seal Rule.** Periwinkle marks only what needs a decision. If everything is highlighted, nothing is.
@@ -128,11 +153,14 @@ An ink-on-paper palette with a single attention colour.
 **Character:** a confident newspaper grotesque at light display sizes, with a precise mono for the registration-furniture labels.
 
 ### Hierarchy
-- **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): the page headline, one per screen.
-- **Stat** (400, 34px, 1.1): figures in the stats row, proportional numerals.
+- **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): the Overview headline.
+- **Headline** (400, clamp(34px, 3.8vw, 52px)): headlines on Employees, Insights and the employee page. **Dialog** titles use 28px.
+- **Stat** (400, 34px, 28px on phones, 1.1): figures in the stats row, proportional numerals.
 - **Title** (500, 19px): plate titles.
-- **Body** (400, 15px, 1.5): everything else, prose capped at 62ch.
+- **Body** (400, 15px, 1.5): everything else, prose capped at 62ch. **Table** text is 14px; secondary lines and captions are **Small** at 12px.
 - **Label** (Azeret Mono 400, 11px, 0.14em, uppercase): plate meta, stat labels, tokens, stamps, axis ticks.
+
+All sizes are CSS custom properties (`--fs-*`) in `apps/web/app/globals.css`; components never hard-code a size.
 
 ### Named Rules
 **The Tabular Rule.** Numbers in tables and charts use `font-variant-numeric: tabular-nums` so columns align. Display figures (the stats row) keep proportional numerals, because tabular commas open visible gaps at 34px. Money shows its local currency first and the USD equivalent beneath in Second Ink.
@@ -162,6 +190,9 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 
 ### Tokens (filters)
 - Mono label, 1px hairline border, white wash. The active token sits on an ink slab that slides between tokens (0.45s, cubic-bezier(.19,1,.22,1)).
+
+### Selection
+- A selected box-plot row tints its background with the seal colour and sets its label in Periwinkle Ink at 500 weight. No side stripes.
 
 ### Plates
 - White-washed panels with hairline borders and crosshair corners. The header row puts the 19px title on the left and mono meta ("Plate 1 · by country") on the right, on one baseline. Nothing sits above the title.

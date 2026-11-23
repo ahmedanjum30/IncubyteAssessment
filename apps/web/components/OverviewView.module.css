@@ -14,7 +14,7 @@
 
 .title {
   font-weight: 400;
-  font-size: clamp(36px, 4.2vw, 58px);
+  font-size: var(--fs-display);
   line-height: 1.02;
   letter-spacing: -0.025em;
   text-wrap: balance;
@@ -54,7 +54,7 @@
   display: block;
   margin-top: 6px;
   font-weight: 400;
-  font-size: 34px;
+  font-size: var(--fs-stat);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -93,7 +93,7 @@
   width: 18px;
   height: 10px;
   border: 1px solid var(--ink);
-  background: #fff;
+  background: var(--paper);
   vertical-align: -1px;
   margin-right: 6px;
 }
@@ -161,9 +161,6 @@
 @media (max-width: 640px) {
   .stat {
     margin-right: 12px;
-  }
-  .stat b {
-    font-size: 28px;
   }
   .seal {
     display: none;

@@ -54,7 +54,7 @@
 
 .title {
   font-weight: 400;
-  font-size: 28px;
+  font-size: var(--fs-dialog);
   letter-spacing: -0.02em;
 }
 

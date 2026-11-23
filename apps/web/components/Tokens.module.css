@@ -31,9 +31,9 @@
   min-height: 36px;
   padding: 8px 12px;
   border: 1px solid var(--hair);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--wash-strong);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   transition:

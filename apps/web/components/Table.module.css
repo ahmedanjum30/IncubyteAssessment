@@ -6,7 +6,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: var(--fs-table);
 }
 
 .table th {
@@ -27,7 +27,7 @@
 .table td small {
   display: block;
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: var(--fs-small);
 }
 
 .table tbody tr {
@@ -36,7 +36,7 @@
 }
 
 .table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--wash-strong);
 }
 
 .n {
@@ -104,7 +104,7 @@
   display: block;
   height: 12px;
   width: 70%;
-  background: linear-gradient(90deg, var(--hair-soft), #eceae7, var(--hair-soft));
+  background: linear-gradient(90deg, var(--hair-soft), var(--sheet), var(--hair-soft));
   background-size: 200% 100%;
   animation: shimmer 1.2s linear infinite;
 }

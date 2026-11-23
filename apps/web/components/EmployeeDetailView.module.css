@@ -31,7 +31,7 @@
 
 .name {
   font-weight: 400;
-  font-size: clamp(34px, 4vw, 54px);
+  font-size: var(--fs-headline);
   line-height: 1.03;
   letter-spacing: -0.025em;
   margin-bottom: 8px;
@@ -64,7 +64,7 @@
   display: block;
   margin-top: 6px;
   font-weight: 400;
-  font-size: 32px;
+  font-size: var(--fs-stat);
   letter-spacing: -0.02em;
 }
 
@@ -94,7 +94,7 @@
   position: absolute;
   top: 8px;
   bottom: 8px;
-  background: #fff;
+  background: var(--paper);
   border: 1px solid var(--ink);
   animation: grow 0.8s var(--ease-out) both;
   transform-origin: left;
