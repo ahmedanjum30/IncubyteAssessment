@@ -1,0 +1,121 @@
+{
+  "title": "Choose the visual world for ACME Pay",
+  "question": "Three styles for the HR salary tool. Pick one to build on, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Thematic Atlas",
+      "kicker": "THE ROLL",
+      "lineage": "national statistical atlases and Bertin's map semiology",
+      "thesis": "Pay across countries read the way an atlas reads a continent: flat colour ramps, legend-first filters.",
+      "palette": ["#F4F1EA", "#1C2B33", "#2F6F7E", "#A7D3C9", "#E9B44C", "#C8553D"],
+      "materials": ["flat sequential colour ramps", "hairline borders", "condensed map labels"],
+      "viewport": "Side rail, legend-style filter bar, a country tile cartogram coloured by median pay, employee table below.",
+      "risk": "Colour ramps must stay legible for colour-blind users; every tile also carries its number.",
+      "raised": [
+        {"from": "challenger-splitflap", "raise": "Edited rows restyle in place without breaking the table grid, so every change announces itself where it happened."},
+        {"from": "challenger-ticket", "raise": "Salary changes never vanish: the previous value stays visible, struck through, in the record's history."},
+        {"from": "challenger-staratlas", "raise": "Size carries hierarchy on a fixed ramp: cartogram tiles scale by headcount, colour by pay."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "Isotype Census",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Otto Neurath's Vienna Method picture statistics",
+      "thesis": "People counted as people: every pay band is a row of figures, one figure per 100 employees.",
+      "palette": ["#F2EFE6", "#1D1D1B", "#C23B22", "#3A5A78", "#D9A441", "#6B8F5E"],
+      "materials": ["flat printed ink", "repeated pictogram units", "geometric sans"],
+      "viewport": "Top bar, KPI strip, pay bands drawn as pictogram rows by department, dense table beside.",
+      "risk": "Pictograms get decorative fast; they must stay exact counts, not illustration.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-annual",
+      "kind": "challenger",
+      "catalogId": "design-annual-s-plate-section",
+      "label": "Annual Plate Sheet",
+      "verdict": "competitive",
+      "lineage": "a design annual's plate section on near-white stock",
+      "thesis": "One near-white sheet ruled in hairlines: one grotesque, mono labels, a single periwinkle mark for what needs attention.",
+      "palette": ["#F5F4F6", "#16181A", "#C9C7C4", "#DCDDF3", "#4B4FA8"],
+      "materials": ["1px hairline grid", "registration crosshairs", "mono uppercase labels"],
+      "viewport": "Sticky mono token bar of active filters, hairline-ruled KPI row, box plots by country, table on the same sheet.",
+      "case": "Fuses cleanly with a dense table and wins on calm clarity; loses on audience identification.",
+      "risk": "So quiet it can read as unfinished if the hairlines and type scale are not exact.",
+      "html": ".impeccable/mocks/decision/challenger-annual.html"
+    },
+    {
+      "id": "challenger-splitflap", "kind": "challenger", "catalogId": "signals-instruments-split-flap-concourse",
+      "label": "Split-Flap Board", "verdict": "declined",
+      "lineage": "rail concourse departure boards",
+      "thesis": "Employees as live rows on a departure board.",
+      "palette": ["#111111", "#FFFFFF", "#F2A93B", "#B3261E"],
+      "materials": ["matte flaps", "brushed steel"],
+      "viewport": "A black board of employee rows.", "risk": "A costume of a transit tool on an HR screen.",
+      "case": "HR managers do not identify with a concourse; black board hurts long sessions.",
+      "kept": "Rows restyle in place on change without breaking the grid."
+    },
+    {
+      "id": "challenger-ticket", "kind": "challenger", "catalogId": "vernacular-ephemera-jet-age-ticket-wallet",
+      "label": "Ticket Wallet", "verdict": "declined",
+      "lineage": "jet-age airline coupon books",
+      "thesis": "Each salary change as a stamped coupon.",
+      "palette": ["#1B2A4A", "#C8102E", "#FFFFFF", "#5B3F8C"],
+      "materials": ["carbon copy", "coupon stock"],
+      "viewport": "A coupon stack per employee.", "risk": "Travel metaphor muddies a pay tool.",
+      "case": "Strong on audit history, weak on scanning 10,000 rows.",
+      "kept": "Nothing disappears, it cancels: salary history stays visible."
+    },
+    {
+      "id": "challenger-staratlas", "kind": "challenger", "catalogId": "notation-diagram-systems-star-atlas",
+      "label": "Star Atlas", "verdict": "declined",
+      "lineage": "celestial charts",
+      "thesis": "Salaries as stars sized by magnitude.",
+      "palette": ["#0E1A33", "#F4F4F0", "#E05A47"],
+      "materials": ["navy chart ground", "magnitude dots"],
+      "viewport": "A navy scatter of salaries.", "risk": "Dark, poetic, slow to read.",
+      "case": "Dark ground and mythic layer fight a daily data tool.",
+      "kept": "Size carries hierarchy on a fixed ramp."
+    },
+    {
+      "id": "challenger-zoo", "kind": "challenger", "catalogId": "aww2-zoo-gardens-guide-map",
+      "label": "Garden Guide Map", "verdict": "declined",
+      "lineage": "zoo and garden guide maps",
+      "thesis": "Departments as swelling colour lobes.",
+      "palette": ["#8ED462", "#F5F1E4", "#2C2E2A", "#FF705D"],
+      "materials": ["flat colour lobes"],
+      "viewport": "One dominant lobe per screen.", "risk": "Playful shapes undermine salary seriousness.",
+      "case": "Organic lobes cannot hold a sortable table.",
+      "kept": "Colour owns whole regions, not scattered accents."
+    },
+    {
+      "id": "challenger-doujin", "kind": "challenger", "catalogId": "pop-culture-shelf-doujin-event-catalog",
+      "label": "Event Circle Catalog", "verdict": "declined",
+      "lineage": "convention circle catalogs",
+      "thesis": "Employees as stamp-sized cells in a hall grid.",
+      "palette": ["#1A1A1A", "#E8E4DA", "#3C7DD9"],
+      "materials": ["newsprint", "single ink"],
+      "viewport": "A packed grid of employee cells.", "risk": "Thumbnail grid has no real images to carry.",
+      "case": "No pictures exist to fill the cells; table wins.",
+      "kept": "The grid repacks in whole cells on narrow screens."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "The category standard",
+    "thesis": "A clean blue data-dense HR dashboard, executed impeccably.",
+    "palette": ["#F8FAFC", "#1E3A8A", "#1E40AF", "#D97706", "#FFFFFF"],
+    "materials": ["white cards", "KPI tiles", "Fira Sans with Fira Code figures"],
+    "viewport": "Sidebar, KPI cards, bar chart and table, the arrangement any HR SaaS ships.",
+    "risk": "Indistinguishable from every admin template by design.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

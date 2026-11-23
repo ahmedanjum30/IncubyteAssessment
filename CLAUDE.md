@@ -56,3 +56,11 @@ Do not introduce a different framework, database or linter without asking first.
 - Make **small, incremental commits** that each represent one logical step. The commit history is part of the assessment.
 - Commit messages: imperative mood, short subject line (e.g. `Add employee list endpoint with pagination`).
 - Requirements doc is committed before any application code.
+
+## AI workflow log
+
+The interview covers how AI was used. Keep `docs/AI_WORKFLOW.md` current as work happens:
+
+- Key prompts and instructions given to AI tools (Claude Code, impeccable, ui-ux-pro-max).
+- Decisions where AI output was rejected or corrected, and why.
+- Trade-offs considered and the reasoning behind the choice.

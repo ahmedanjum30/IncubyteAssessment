@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.pdf
+.impeccable/live/
+.impeccable/config.local.json
+.DS_Store

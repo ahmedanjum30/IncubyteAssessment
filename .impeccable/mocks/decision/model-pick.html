@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ACME Pay · Isotype Census</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F2EFE6;--ink:#1D1D1B;--ink2:#55524A;--red:#C23B22;--blue:#3A5A78;--ochre:#D9A441;--green:#6B8F5E;--rule:#D3CDBF}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden;background:var(--paper);color:var(--ink);font:15px/1.45 Jost,sans-serif}
+.top{height:60px;background:var(--ink);color:var(--paper);display:flex;align-items:center;gap:36px;padding:0 32px}
+.logo{font:700 22px Jost;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo svg{width:22px;height:22px}
+.top nav{display:flex;gap:6px}
+.top nav a{color:#D8D3C6;text-decoration:none;font-weight:500;padding:8px 12px;border-radius:2px}
+.top nav a.on{background:var(--paper);color:var(--ink)}
+.search{margin-left:auto;background:#2C2C29;border:1px solid #4A4943;color:#D8D3C6;padding:8px 12px;width:300px;border-radius:2px;font:15px Jost}
+.page{padding:24px 32px;display:grid;grid-template-columns:1fr 520px;gap:28px;height:840px}
+h1{font:700 32px/1.1 Jost;letter-spacing:-.01em}
+.lede{color:var(--ink2);margin:6px 0 16px;max-width:70ch}
+.facts{display:flex;gap:0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin-bottom:18px}
+.facts div{padding:10px 18px 10px 0;margin-right:18px;border-right:1px solid var(--rule)}
+.facts div:last-child{border:0}
+.facts b{display:block;font:600 22px Jost;font-variant-numeric:tabular-nums}
+.facts span{font-size:13px;color:var(--ink2)}
+.key{display:flex;gap:18px;align-items:center;font-size:13px;color:var(--ink2);margin-bottom:12px}
+.key i{display:inline-flex;align-items:center;gap:6px}
+.key svg{width:11px;height:20px}
+.rows{display:grid;grid-template-columns:130px 1fr 70px;row-gap:10px;align-items:center}
+.rows .lab{font-weight:600}
+.rows .num{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink2);font-size:14px}
+.figs{display:flex;flex-wrap:wrap;gap:2px}
+.figs svg{width:11px;height:22px}
+.r{fill:var(--red)}.b{fill:var(--blue)}.o{fill:var(--ochre)}
+.side{border-left:2px solid var(--ink);padding-left:24px;display:flex;flex-direction:column;min-height:0}
+.side h2{font:600 20px Jost;margin-bottom:4px}
+.side .note{font-size:13px;color:var(--ink2);margin-bottom:10px}
+.filters{display:flex;gap:6px;margin-bottom:10px}
+.filters span{border:1.5px solid var(--ink);padding:4px 10px;font-size:13px;font-weight:500;border-radius:2px}
+.filters span.on{background:var(--red);border-color:var(--red);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:6px 6px;border-bottom:2px solid var(--ink)}
+td{padding:9px 6px;border-bottom:1px solid var(--rule)}
+.n{text-align:right}
+td small{display:block;color:var(--ink2);font-size:12px}
+.gap{color:var(--red);font-weight:600}
+.btn{margin-top:auto;align-self:flex-start;background:var(--ink);color:var(--paper);border:0;padding:10px 16px;font:600 15px Jost;border-radius:2px}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="p" viewBox="0 0 10 20"><circle cx="5" cy="3" r="2.6"/><path d="M1.2 7.2h7.6v6.3H7.4V20H2.6v-6.5H1.2z"/></symbol></defs></svg>
+<div class="top">
+  <div class="logo"><svg viewBox="0 0 10 20" fill="#F2EFE6"><use href="#p"/></svg>ACME Pay</div>
+  <nav><a href="#" class="on">Overview</a><a href="#">Employees</a><a href="#">Pay insights</a><a href="#">Change history</a></nav>
+  <input class="search" value="Search 10,000 employees by name or ID">
+</div>
+<div class="page">
+  <section>
+    <h1>Who is paid where in their band</h1>
+    <p class="lede">Each figure is 100 employees, grouped by department. Red figures sit below their band minimum, blue within band, ochre above band maximum.</p>
+    <div class="facts">
+      <div><b>10,000</b><span>employees, 12 countries</span></div>
+      <div><b>$61,800</b><span>median base, USD</span></div>
+      <div><b>2,000</b><span>below band minimum</span></div>
+      <div><b>18 changes</b><span>salary edits this week</span></div>
+    </div>
+    <div class="key"><i><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg>Below band</i><i><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg>Within band</i><i><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg>Above band</i><i>1 figure = 100 employees</i></div>
+    <div class="rows">
+      <span class="lab">Engineering</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">3,400</span>
+      <span class="lab">Sales</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">1,900</span>
+      <span class="lab">Support</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">1,500</span>
+      <span class="lab">Operations</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">1,100</span>
+      <span class="lab">Product</span><span class="figs"><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">600</span>
+      <span class="lab">Finance</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="o"><use href="#p"/></svg></span><span class="num">550</span>
+      <span class="lab">People</span><span class="figs"><svg viewBox="0 0 10 20" class="r"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg></span><span class="num">500</span>
+      <span class="lab">Design</span><span class="figs"><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg><svg viewBox="0 0 10 20" class="b"><use href="#p"/></svg></span><span class="num">450</span>
+    </div>
+  </section>
+  <aside class="side">
+    <h2>Below band, Engineering</h2>
+    <p class="note">600 employees. Gap is the amount needed to reach band minimum.</p>
+    <div class="filters"><span class="on">Below band</span><span>All countries</span><span>All levels</span></div>
+    <table>
+      <thead><tr><th>Employee</th><th>Country</th><th class="n">Base</th><th class="n">Gap</th></tr></thead>
+      <tbody>
+        <tr><td>Priya Raman<small>Senior Software Engineer</small></td><td>India</td><td class="n">₹2,940,000<small>$35,300</small></td><td class="n gap">−$2,100</td></tr>
+        <tr><td>Tomasz Nowak<small>QA Engineer</small></td><td>Poland</td><td class="n">zł198,000<small>$49,800</small></td><td class="n gap">−$1,400</td></tr>
+        <tr><td>Wei Jie Tan<small>DevOps Engineer</small></td><td>Singapore</td><td class="n">S$112,000<small>$83,400</small></td><td class="n gap">−$3,600</td></tr>
+        <tr><td>Rafael Lima<small>Frontend Engineer</small></td><td>Brazil</td><td class="n">R$121,000<small>$24,300</small></td><td class="n gap">−$900</td></tr>
+        <tr><td>Aoife Byrne<small>Site Reliability Engineer</small></td><td>United Kingdom</td><td class="n">£66,000<small>$83,300</small></td><td class="n gap">−$4,700</td></tr>
+        <tr><td>Carlos Ruiz<small>Mobile Engineer</small></td><td>Mexico</td><td class="n">MX$410,000<small>$23,800</small></td><td class="n gap">−$1,200</td></tr>
+      </tbody>
+    </table>
+    <button class="btn">Open all 600 in Employees</button>
+  </aside>
+</div></body></html>

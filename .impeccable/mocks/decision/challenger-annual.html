@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ACME Pay · Annual Plate Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--sheet:#F5F4F6;--ink:#16181A;--ink2:#5A5C60;--hair:#C9C7C4;--seal:#DCDDF3;--peri:#4B4FA8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden;color:var(--ink);font:15px/1.45 Geist,sans-serif;
+  background:radial-gradient(circle at 0 0,#FAF6F5 0,transparent 40%),radial-gradient(circle at 100% 100%,#EEF3EF 0,transparent 45%),var(--sheet)}
+.mono{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.bar{height:64px;border-bottom:1px solid var(--hair);display:flex;align-items:center;padding:0 40px;gap:28px}
+.bar .name{font:600 18px Geist;letter-spacing:-.01em;margin-right:12px}
+.bar nav{display:flex;gap:22px}
+.bar nav a{color:var(--ink2);text-decoration:none}
+.bar nav a.on{color:var(--ink);box-shadow:0 1px 0 var(--ink)}
+.bar .tok{margin-left:auto;display:flex;gap:8px}
+.tok span{border:1px solid var(--hair);padding:6px 10px;background:#fff}
+.tok span.on{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.wrap{padding:26px 40px;display:grid;grid-template-columns:repeat(12,1fr);column-gap:40px;row-gap:22px}
+.head{grid-column:1/9}
+h1{font:400 54px/1.02 Geist;letter-spacing:-.02em}
+.head p{color:var(--ink2);margin-top:10px;max-width:62ch}
+.actions{grid-column:9/13;display:flex;gap:10px;justify-content:flex-end;align-items:flex-end}
+.b1{background:var(--ink);color:var(--sheet);border:0;padding:12px 18px}
+.b2{background:transparent;border:1px solid var(--ink);padding:11px 17px;color:var(--ink)}
+.stats{grid-column:1/13;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.stats div{padding:12px 16px 12px 0;border-right:1px solid var(--hair);margin-right:16px}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font:400 28px Geist;letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-top:4px}
+.stats .att b{color:var(--peri)}
+.plate{position:relative;border:1px solid var(--hair);padding:18px 20px;background:rgba(255,255,255,.5)}
+.plate::before,.plate::after{content:"";position:absolute;width:14px;height:14px;background:linear-gradient(var(--ink),var(--ink)) center/1px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat}
+.plate::before{top:-7px;left:-7px}.plate::after{bottom:-7px;right:-7px}
+.p1{grid-column:1/6}.p2{grid-column:6/13}
+.plate h2{font:500 18px Geist;margin:6px 0 14px}
+.bx{display:grid;grid-template-columns:120px 1fr 74px;align-items:center;height:30px;border-bottom:1px solid #E2E0DD}
+.bx .lab{font-size:14px}
+.bx .v{text-align:right;font:400 13px "Geist Mono";font-variant-numeric:tabular-nums}
+.track{position:relative;height:30px}
+.wh{position:absolute;top:14px;height:1px;background:var(--ink)}
+.box{position:absolute;top:8px;height:13px;border:1px solid var(--ink);background:#fff}
+.med{position:absolute;top:5px;width:2px;height:19px;background:var(--ink)}
+.bx.att .box{background:var(--seal);border-color:var(--peri)}.bx.att .med{background:var(--peri)}
+.axis{display:grid;grid-template-columns:120px 1fr 74px;margin-top:6px}
+.axis div{display:flex;justify-content:space-between;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ink);font-weight:400;color:var(--ink2)}
+td{padding:9px 8px;border-bottom:1px solid #E2E0DD}
+.n{text-align:right}
+td small{display:block;color:var(--ink2);font-size:12px}
+.stamp{display:inline-block;border:1px solid var(--peri);color:var(--peri);border-radius:999px;padding:1px 8px;background:var(--seal)}
+.dots{grid-column:1/13;height:8px;background:radial-gradient(circle,var(--hair) 1px,transparent 1.5px) 0 0/8px 8px}
+</style></head><body>
+<div class="bar">
+  <span class="name">ACME Pay</span>
+  <nav><a href="#" class="on">Overview</a><a href="#">Employees</a><a href="#">Pay insights</a><a href="#">Change history</a></nav>
+  <div class="tok mono"><span class="on">Engineering</span><span>All countries</span><span>Level L3–L5</span><span>+ Filter</span></div>
+</div>
+<div class="wrap">
+  <div class="head"><h1>Engineering pay, across twelve countries</h1><p>Base salary distribution per country, converted to USD at 1 Nov 2026 rates. Box spans the middle half of employees; the bar marks the median.</p></div>
+  <div class="actions"><button class="b2">Export CSV</button><button class="b1">Add employee</button></div>
+  <div class="stats">
+    <div><span class="mono">Employees</span><b>3,400</b></div>
+    <div><span class="mono">Median base, USD</span><b>$74,900</b></div>
+    <div><span class="mono">Spread, P90 / P10</span><b>4.8×</b></div>
+    <div class="att"><span class="mono">Below band minimum</span><b>600</b></div>
+  </div>
+  <section class="plate p1">
+    <span class="mono">Plate 1 · Distribution by country</span>
+    <h2>Where engineering pay sits</h2>
+    <div class="bx"><span class="lab">United States</span><span class="track"><span class="wh" style="left:62%;width:34%"></span><span class="box" style="left:72%;width:16%"></span><span class="med" style="left:79%"></span></span><span class="v">$131k</span></div>
+    <div class="bx"><span class="lab">Canada</span><span class="track"><span class="wh" style="left:44%;width:30%"></span><span class="box" style="left:52%;width:14%"></span><span class="med" style="left:58%"></span></span><span class="v">$92k</span></div>
+    <div class="bx"><span class="lab">United Kingdom</span><span class="track"><span class="wh" style="left:42%;width:32%"></span><span class="box" style="left:50%;width:15%"></span><span class="med" style="left:56%"></span></span><span class="v">$89k</span></div>
+    <div class="bx"><span class="lab">Germany</span><span class="track"><span class="wh" style="left:40%;width:28%"></span><span class="box" style="left:47%;width:13%"></span><span class="med" style="left:53%"></span></span><span class="v">$84k</span></div>
+    <div class="bx att"><span class="lab">Singapore</span><span class="track"><span class="wh" style="left:30%;width:36%"></span><span class="box" style="left:38%;width:18%"></span><span class="med" style="left:46%"></span></span><span class="v">$77k</span></div>
+    <div class="bx"><span class="lab">Poland</span><span class="track"><span class="wh" style="left:18%;width:24%"></span><span class="box" style="left:24%;width:11%"></span><span class="med" style="left:29%"></span></span><span class="v">$47k</span></div>
+    <div class="bx att"><span class="lab">India</span><span class="track"><span class="wh" style="left:6%;width:26%"></span><span class="box" style="left:12%;width:10%"></span><span class="med" style="left:16%"></span></span><span class="v">$31k</span></div>
+    <div class="bx"><span class="lab">Brazil</span><span class="track"><span class="wh" style="left:7%;width:20%"></span><span class="box" style="left:12%;width:9%"></span><span class="med" style="left:16%"></span></span><span class="v">$29k</span></div>
+    <div class="axis mono"><span></span><div><span>$0</span><span>$80k</span><span>$160k</span></div><span></span></div>
+  </section>
+  <section class="plate p2">
+    <span class="mono">Plate 2 · Employees, sorted by gap to band</span>
+    <h2>Needs a decision</h2>
+    <table>
+      <thead><tr><th>Employee</th><th>Country</th><th>Level</th><th class="n">Base salary</th><th class="n">USD</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Aoife Byrne<small>Site Reliability Engineer · EMP-03377</small></td><td>United Kingdom</td><td>L4</td><td class="n">£66,000</td><td class="n">$83,300</td><td><span class="stamp mono">Below</span></td></tr>
+        <tr><td>Wei Jie Tan<small>DevOps Engineer · EMP-05530</small></td><td>Singapore</td><td>L4</td><td class="n">S$112,000</td><td class="n">$83,400</td><td><span class="stamp mono">Below</span></td></tr>
+        <tr><td>Priya Raman<small>Senior Software Engineer · EMP-04821</small></td><td>India</td><td>L4</td><td class="n">₹2,940,000</td><td class="n">$35,300</td><td><span class="stamp mono">Below</span></td></tr>
+        <tr><td>Tomasz Nowak<small>QA Engineer · EMP-06648</small></td><td>Poland</td><td>L3</td><td class="n">zł198,000</td><td class="n">$49,800</td><td><span class="stamp mono">Below</span></td></tr>
+        <tr><td>Jonas Weber<small>Backend Engineer · EMP-01944</small></td><td>Germany</td><td>L3</td><td class="n">€74,500</td><td class="n">$80,900</td><td><span class="mono">In band</span></td></tr>
+        <tr><td>Olivia Chen<small>UX Engineer · EMP-08127</small></td><td>Canada</td><td>L3</td><td class="n">CA$104,000</td><td class="n">$76,400</td><td><span class="mono">In band</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="dots"></div>
+</div></body></html>

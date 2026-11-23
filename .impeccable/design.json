@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T12:00:00Z",
+  "title": "Design System: ACME Pay",
+  "extensions": {
+    "colorMeta": {
+      "ink": {"role": "primary", "displayName": "Plate Ink"},
+      "periwinkle": {"role": "secondary", "displayName": "Decision Periwinkle"},
+      "sheet": {"role": "neutral", "displayName": "Annual Sheet"}
+    },
+    "shadows": [{"name": "dialog", "value": "0 24px 60px -20px rgba(22,24,26,.35)", "purpose": "Dialogs only."}],
+    "motion": [
+      {"name": "ease-out", "value": "cubic-bezier(.19,1,.22,1)", "purpose": "Arrivals, token slab, plate printing."},
+      {"name": "ease-std", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "Routine state changes."}
+    ],
+    "breakpoints": [{"name": "stack", "value": "1100px"}, {"name": "phone", "value": "640px"}]
+  },
+  "components": [
+    {"name": "Primary Button", "kind": "button", "refersTo": "button-primary", "description": "Main action per screen.",
+     "html": "<button class=\"ds-btn\">Add employee</button>",
+     "css": ".ds-btn{background:#16181A;color:#F5F4F6;border:1px solid #16181A;padding:12px 18px;font:15px 'Schibsted Grotesk',system-ui;border-radius:0;transition:background .1s,color .1s}.ds-btn:hover{background:#F5F4F6;color:#16181A}"},
+    {"name": "Below Band Stamp", "kind": "chip", "refersTo": "stamp", "description": "Marks an employee paid below band minimum.",
+     "html": "<span class=\"ds-stamp\">Below</span>",
+     "css": ".ds-stamp{display:inline-block;border:1px solid #4B4FA8;color:#34377F;background:#DCDDF3;border-radius:999px;padding:2px 9px;font:11px 'Azeret Mono',monospace;letter-spacing:.14em;text-transform:uppercase}"}
+  ],
+  "narrative": {
+    "northStar": "The Plate Section",
+    "keyCharacteristics": ["Tinted near-white sheet", "Hairlines and zero radius", "One periwinkle for decisions", "Box plots that print themselves"],
+    "rules": [{"name": "The One Seal Rule", "body": "Periwinkle marks only what needs a decision.", "section": "colors"}, {"name": "The Tabular Rule", "body": "Every number is tabular; local currency first, USD beneath.", "section": "typography"}],
+    "dos": ["Do keep numbers tabular", "Do use standard controls in the plate vocabulary"],
+    "donts": ["Don't round corners", "Don't add a second accent", "Don't put kickers above headings"]
+  }
+}

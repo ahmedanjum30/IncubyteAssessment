@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>ACME Pay · Thematic Atlas</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#F4F1EA;--ink:#1C2B33;--ink2:#4A5A62;--rule:#D6D0C3;--r1:#E3EEEA;--r2:#A7D3C9;--r3:#6BAFA8;--r4:#2F6F7E;--r5:#1B4552;--warn:#C8553D;--gold:#E9B44C}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden;background:var(--ground);color:var(--ink);font:14px/1.45 "Source Sans 3",sans-serif}
+.app{display:grid;grid-template-columns:232px 1fr;height:900px}
+.rail{background:var(--r5);color:#EAF2EF;padding:22px 18px;display:flex;flex-direction:column;gap:4px}
+.brand{font:700 26px/1 "Barlow Condensed";letter-spacing:.01em;margin-bottom:26px}
+.brand span{color:var(--r2)}
+.nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:4px;color:#CFE2DD;text-decoration:none;font-weight:600}
+.nav a.on{background:#0F2E38;color:#fff;box-shadow:inset 0 -2px 0 var(--r2)}
+.nav svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+.rail .foot{margin-top:auto;font-size:12px;color:#9FC0B8}
+main{padding:22px 28px;display:grid;grid-template-rows:auto auto 1fr;gap:16px;overflow:hidden}
+header{display:flex;align-items:flex-end;justify-content:space-between}
+h1{font:700 34px/1 "Barlow Condensed";letter-spacing:.005em}
+.sub{color:var(--ink2);margin-top:4px}
+.btn{font:600 14px "Source Sans 3";padding:9px 14px;border-radius:4px;border:1px solid var(--ink);background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.legend{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--rule);background:#FBFAF6;border-radius:4px}
+.chip{display:flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--rule);border-radius:3px;background:#fff;font-weight:600}
+.chip small{font:600 11px "Barlow Condensed";letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.ramp{display:flex;margin-left:auto;align-items:center;gap:8px;font-size:12px;color:var(--ink2)}
+.ramp i{display:inline-block;width:26px;height:12px}
+.alert{display:flex;align-items:center;gap:8px;color:var(--warn);font-weight:700}
+.alert b{display:inline-block;width:10px;height:10px;background:var(--warn);border-radius:50%}
+.work{display:grid;grid-template-columns:600px 1fr;gap:20px;min-height:0}
+.panel{border:1px solid var(--rule);background:#FBFAF6;border-radius:4px;padding:14px 16px;min-height:0;overflow:hidden}
+.panel h2{font:700 20px/1.1 "Barlow Condensed";margin-bottom:2px}
+.panel .note{font-size:12px;color:var(--ink2);margin-bottom:12px}
+.carto{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:58px;gap:4px}
+.t{padding:6px 8px;color:var(--ink);border:1px solid rgba(28,43,51,.18);display:flex;flex-direction:column;justify-content:space-between}
+.t .c{font:700 15px/1 "Barlow Condensed";letter-spacing:.04em}
+.t .v{font:600 13px "Source Sans 3";font-variant-numeric:tabular-nums}
+.t.d{color:#fff}
+.t.sel{outline:2px solid var(--ink);outline-offset:1px}
+.w2{grid-column:span 2}.w3{grid-column:span 3}.h2{grid-row:span 2}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font:600 12px "Barlow Condensed";letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:7px 8px;border-bottom:1.5px solid var(--ink)}
+td{padding:8px;border-bottom:1px solid var(--rule)}
+td.n{text-align:right}th.n{text-align:right}
+td .loc{display:block;font-size:12px;color:var(--ink2)}
+tr.chg td{background:#FFF6E3}
+s{color:var(--ink2)}
+.sw{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:baseline;border:1px solid rgba(0,0,0,.2)}
+.tag{font:600 11px "Barlow Condensed";letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px}
+.tag.below{background:#F6DDD6;color:#8E2E1D}.tag.in{background:var(--r1);color:var(--r5)}
+.pager{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:var(--ink2)}
+</style></head><body><div class="app">
+<aside class="rail">
+  <div class="brand">ACME <span>Pay</span></div>
+  <nav class="nav">
+    <a href="#" class="on"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>Overview</a>
+    <a href="#"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.8a3.5 3.5 0 010 6.4M18.5 14.8c1.6.9 2.6 2.6 3 5.2"/></svg>Employees</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Pay insights</a>
+    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>Change history</a>
+  </nav>
+  <div class="foot">Seeded demo data · 10,000 employees</div>
+</aside>
+<main>
+  <header>
+    <div><h1>How ACME pays, by country</h1><p class="sub">Median annual base salary, converted to USD at 1 Nov 2026 rates. Local currency shown per employee.</p></div>
+    <div style="display:flex;gap:8px"><button class="btn ghost">Export CSV</button><button class="btn">Add employee</button></div>
+  </header>
+  <div class="legend">
+    <span class="chip"><small>Department</small>All</span>
+    <span class="chip"><small>Job title</small>All</span>
+    <span class="chip"><small>Country</small>Germany</span>
+    <span class="alert"><b></b>2,000 employees paid below band minimum</span>
+    <span class="ramp">$15k <i style="background:var(--r1)"></i><i style="background:var(--r2)"></i><i style="background:var(--r3)"></i><i style="background:var(--r4)"></i><i style="background:var(--r5)"></i> $120k</span>
+  </div>
+  <div class="work">
+    <section class="panel">
+      <h2>Median pay and headcount</h2>
+      <p class="note">Tile size follows headcount, colour follows median pay. Select a tile to filter the table.</p>
+      <div class="carto">
+        <div class="t d w3 h2" style="background:var(--r5)"><span class="c">UNITED STATES</span><span class="v">$118,400 · 2,140</span></div>
+        <div class="t w3 h2" style="background:var(--r2)"><span class="c">INDIA</span><span class="v">$24,300 · 1,850</span></div>
+        <div class="t d w2" style="background:var(--r4)"><span class="c">UNITED KINGDOM</span><span class="v">$84,200 · 1,060</span></div>
+        <div class="t d w2 sel" style="background:var(--r4)"><span class="c">GERMANY</span><span class="v">$79,600 · 980</span></div>
+        <div class="t d w2" style="background:var(--r4)"><span class="c">CANADA</span><span class="v">$86,900 · 720</span></div>
+        <div class="t w2" style="background:var(--r2)"><span class="c">BRAZIL</span><span class="v">$27,900 · 710</span></div>
+        <div class="t w2" style="background:var(--r3)"><span class="c">POLAND</span><span class="v">$38,700 · 640</span></div>
+        <div class="t w2" style="background:var(--r2)"><span class="c">MEXICO</span><span class="v">$22,600 · 560</span></div>
+        <div class="t d" style="background:var(--r4)"><span class="c">AUS</span><span class="v">$89.3k</span></div>
+        <div class="t d" style="background:var(--r4)"><span class="c">SGP</span><span class="v">$72.5k</span></div>
+        <div class="t d" style="background:var(--r4)"><span class="c">NLD</span><span class="v">$76.1k</span></div>
+        <div class="t" style="background:var(--r1)"><span class="c">PHL</span><span class="v">$14.8k</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Germany · 980 employees</h2>
+      <p class="note">Sorted by salary relative to band. Changed this week highlighted, previous value kept.</p>
+      <table>
+        <thead><tr><th>Employee</th><th>Job title</th><th>Department</th><th class="n">Base salary</th><th>Band</th></tr></thead>
+        <tbody>
+          <tr><td>Lena Hoffmann<span class="loc">EMP-07302</span></td><td>Data Analyst</td><td>Finance</td><td class="n">€61,000<span class="loc">$66,200</span></td><td><span class="tag below">Below</span></td></tr>
+          <tr class="chg"><td>Jonas Weber<span class="loc">EMP-01944</span></td><td>Backend Engineer</td><td>Engineering</td><td class="n">€74,500 <s>€69,000</s><span class="loc">$80,900</span></td><td><span class="tag in">In band</span></td></tr>
+          <tr><td>Miriam Schulz<span class="loc">EMP-03015</span></td><td>Account Executive</td><td>Sales</td><td class="n">€68,000<span class="loc">$73,800</span></td><td><span class="tag in">In band</span></td></tr>
+          <tr><td>Felix Braun<span class="loc">EMP-06620</span></td><td>Engineering Manager</td><td>Engineering</td><td class="n">€112,000<span class="loc">$121,600</span></td><td><span class="tag in">In band</span></td></tr>
+          <tr><td>Hannah Koch<span class="loc">EMP-08451</span></td><td>Payroll Specialist</td><td>People</td><td class="n">€54,200<span class="loc">$58,800</span></td><td><span class="tag in">In band</span></td></tr>
+          <tr><td>Lukas Fischer<span class="loc">EMP-02287</span></td><td>Support Engineer</td><td>Support</td><td class="n">€49,800<span class="loc">$54,100</span></td><td><span class="tag below">Below</span></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>Showing 1–6 of 980</span><span>Page 1 of 164</span></div>
+    </section>
+  </div>
+</main></div></body></html>

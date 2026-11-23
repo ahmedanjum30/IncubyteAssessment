@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACME Pay · Overview prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sheet:#F5F4F6; --warm:#FAF6F5; --green:#EEF3EF;
+  --ink:#16181A; --ink-2:#55585D; --hair:#C9C7C4; --hair-soft:#E3E1DE;
+  --seal:#DCDDF3; --peri:#4B4FA8; --peri-ink:#34377F;
+  --ease-out:cubic-bezier(.19,1,.22,1); --ease-std:cubic-bezier(.16,1,.3,1);
+  --gutter:40px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--sheet);color-scheme:light}
+body{
+  min-height:100vh;color:var(--ink);font:15px/1.5 "Schibsted Grotesk",system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 700px at -10% -10%,var(--warm),transparent 60%),
+    radial-gradient(1000px 700px at 110% 110%,var(--green),transparent 60%),
+    var(--sheet);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--seal);color:var(--peri-ink)}
+:focus-visible{outline:2px solid var(--peri);outline-offset:3px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:"Azeret Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- token bar ---------- */
+.bar{position:sticky;top:0;z-index:10;height:64px;display:flex;align-items:center;gap:28px;padding:0 var(--gutter);
+  background:color-mix(in srgb,var(--sheet) 86%,transparent);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--hair)}
+.name{font-weight:600;font-size:17px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.name i{width:14px;height:14px;display:inline-block;background:
+  linear-gradient(var(--ink),var(--ink)) center/1px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat;
+  border-radius:50%;box-shadow:inset 0 0 0 1px var(--ink)}
+.bar nav{display:flex;gap:4px}
+.bar nav a{color:var(--ink-2);text-decoration:none;padding:6px 10px;position:relative;transition:color .15s}
+.bar nav a::after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease-out)}
+.bar nav a:hover{color:var(--ink)} .bar nav a:hover::after,.bar nav a[aria-current]::after{transform:scaleX(1)}
+.bar nav a[aria-current]{color:var(--ink)}
+.tokens{margin-left:auto;display:flex;gap:6px;position:relative}
+.tok{position:relative;z-index:1;padding:7px 11px;border:1px solid var(--hair);background:rgba(255,255,255,.6);transition:color .1s,border-color .1s}
+.tok:hover{border-color:var(--ink)}
+.tok[aria-pressed=true]{color:var(--sheet);border-color:var(--ink);background:transparent}
+.tok-ink{position:absolute;z-index:0;top:0;height:100%;background:var(--ink);transition:transform .45s var(--ease-out),width .45s var(--ease-out)}
+
+/* ---------- page ---------- */
+.page{max-width:1440px;margin:0 auto;padding:34px var(--gutter) 56px;display:grid;grid-template-columns:repeat(12,1fr);column-gap:40px;row-gap:26px}
+.head{grid-column:1/9}
+h1{font-weight:400;font-size:clamp(36px,4.2vw,58px);line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+h1 .swap{display:inline-block}
+.head p{color:var(--ink-2);margin-top:12px;max-width:62ch}
+.actions{grid-column:9/13;display:flex;gap:10px;justify-content:flex-end;align-items:flex-end}
+.btn{padding:12px 18px;border:1px solid var(--ink);transition:background .1s,color .1s}
+.btn.primary{background:var(--ink);color:var(--sheet)}
+.btn.primary:hover{background:var(--sheet);color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--sheet)}
+
+.stats{grid-column:1/13;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.stat{padding:14px 18px 16px 0;margin-right:18px;border-right:1px solid var(--hair);position:relative}
+.stat:last-child{border-right:0;margin-right:0}
+.stat b{display:block;font-weight:400;font-size:34px;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.stat.att b{color:var(--peri)}
+.stat .seal{position:absolute;right:6px;top:50%;width:74px;height:74px;margin-top:-37px;color:var(--peri)}
+.seal .ring{transform-origin:50% 50%;animation:turn 25s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+
+/* ---------- plates ---------- */
+.plate{position:relative;border:1px solid var(--hair);background:rgba(255,255,255,.55);padding:20px 22px 22px}
+.plate .reg{position:absolute;width:15px;height:15px;pointer-events:none;
+  background:linear-gradient(var(--ink),var(--ink)) center/1px 100% no-repeat,linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat}
+.plate .reg::after{content:"";position:absolute;inset:3px;border:1px solid var(--ink);border-radius:50%}
+.reg.tl{top:-8px;left:-8px}.reg.br{bottom:-8px;right:-8px}
+.plate h2{font-weight:500;font-size:19px;letter-spacing:-.01em;margin:6px 0 16px}
+.p1{grid-column:1/6}.p2{grid-column:6/13}
+.plate-head{display:flex;justify-content:space-between;align-items:baseline}
+
+.rows{position:relative}
+.bx{display:grid;grid-template-columns:118px 1fr 64px;align-items:center;height:32px;border-bottom:1px solid var(--hair-soft);cursor:default;position:relative}
+.bx:hover,.bx:focus-within{background:rgba(220,221,243,.28)}
+.bx .lab{font-size:14px;white-space:nowrap}
+.bx .v{text-align:right;font:400 13px "Azeret Mono";font-variant-numeric:tabular-nums}
+.track{position:relative;height:32px}
+.track span{position:absolute;display:block;transition:left .7s var(--ease-out),width .7s var(--ease-out),transform .7s var(--ease-out),opacity .3s}
+.wh{top:15.5px;height:1px;background:var(--ink)}
+.box{top:9px;height:14px;border:1px solid var(--ink);background:#fff}
+.med{top:6px;width:2px;height:20px;margin-left:-1px;background:var(--ink);transform-origin:50% 50%}
+.bx.att .box{background:var(--seal);border-color:var(--peri)}
+.bx.att .med{background:var(--peri)}
+.band{top:0;height:32px;background:rgba(75,79,168,.12);box-shadow:inset 1px 0 0 var(--peri),inset -1px 0 0 var(--peri);opacity:0}
+.rows.show-band .band{opacity:1}
+.axis{display:grid;grid-template-columns:118px 1fr 64px;margin-top:8px;color:var(--ink-2)}
+.axis div{display:flex;justify-content:space-between}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--ink);color:var(--sheet);padding:10px 12px;min-width:220px;
+  opacity:0;transform:translateY(4px);transition:opacity .15s,transform .2s var(--ease-std)}
+.tip.on{opacity:1;transform:none}
+.tip dl{display:grid;grid-template-columns:auto auto;gap:2px 16px;margin-top:6px;font:400 12px "Azeret Mono"}
+.tip dd{text-align:right}
+.legend{display:flex;gap:18px;margin-top:14px;color:var(--ink-2);align-items:center}
+.legend i{display:inline-block;width:18px;height:10px;border:1px solid var(--ink);background:#fff;vertical-align:-1px;margin-right:6px}
+.legend i.a{background:var(--seal);border-color:var(--peri)}
+.legend label{display:flex;align-items:center;gap:6px;cursor:pointer;margin-left:auto}
+
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--ink);font-weight:400;color:var(--ink-2)}
+th button{color:inherit;display:inline-flex;gap:6px;align-items:center}
+th button:hover{color:var(--ink)}
+td{padding:10px 8px;border-bottom:1px solid var(--hair-soft)}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.9)}
+.n{text-align:right}
+td small{display:block;color:var(--ink-2);font-size:12px}
+.stamp{display:inline-block;border:1px solid var(--peri);color:var(--peri-ink);border-radius:999px;padding:2px 9px;background:var(--seal)}
+.gap{color:var(--peri-ink)}
+tbody tr.enter{animation:rowIn .5s var(--ease-out) both}
+@keyframes rowIn{from{opacity:0;transform:translateY(6px)}}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:var(--ink-2)}
+.link{border-bottom:1px solid currentColor;padding-bottom:1px}
+
+.dots{grid-column:1/13;height:40px;position:relative;
+  background:radial-gradient(circle,var(--hair) 1px,transparent 1.6px) 0 0/8px 8px;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.dots::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,var(--peri) 1.2px,transparent 1.8px) 0 0/8px 8px;
+  -webkit-mask:radial-gradient(120px 40px at var(--mx,-200px) 50%,#000,transparent);mask:radial-gradient(120px 40px at var(--mx,-200px) 50%,#000,transparent)}
+.colophon{grid-column:1/13;display:flex;justify-content:space-between;color:var(--ink-2)}
+
+/* ---------- the plate prints: entrance ---------- */
+.printing .reg.tl{animation:regTL .9s var(--ease-out) both}
+.printing .reg.br{animation:regBR .9s var(--ease-out) both}
+@keyframes regTL{from{transform:translate(-10px,-6px);opacity:0}}
+@keyframes regBR{from{transform:translate(10px,6px);opacity:0}}
+.printing .plate{animation:ink .8s var(--ease-out) both}
+@keyframes ink{from{background:rgba(255,255,255,0);border-color:transparent}}
+.printing h1 .swap{animation:rise .8s var(--ease-out) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px);filter:blur(6px)}}
+
+.table-wrap{overflow-x:auto}
+.page>*{min-width:0}
+@media (max-width:1100px){
+  .page{grid-template-columns:1fr;column-gap:0}
+  .p1,.p2,.head,.actions,.stats,.dots,.colophon{grid-column:1/-1}.actions{justify-content:flex-start}
+  .stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}
+  .bar{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:12px;row-gap:10px}
+  .tokens{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none}
+}
+@media (max-width:640px){
+  :root{--gutter:16px}.bar nav{display:none}.stats{grid-template-columns:1fr 1fr}.stat{margin-right:12px}
+  .stat b{font-size:28px}.stat .seal{display:none}
+  .plate{padding:16px 14px}
+  .bx{grid-template-columns:96px 1fr 48px}.axis{grid-template-columns:96px 1fr 48px}
+  .p2 table th:nth-child(3),.p2 table td:nth-child(3),.p2 table th:nth-child(2),.p2 table td:nth-child(2){display:none}
+  .colophon{flex-direction:column;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
+  .track span,.tok-ink{transition:opacity .2s!important}
+  .seal .ring{animation:none}
+}
+</style>
+</head>
+<body class="printing">
+<header class="bar">
+  <span class="name"><i aria-hidden="true"></i>ACME Pay</span>
+  <nav aria-label="Main"><a href="#" aria-current="page">Overview</a><a href="#">Employees</a><a href="#">Pay insights</a><a href="#">Change history</a></nav>
+  <div class="tokens mono" role="group" aria-label="Department">
+    <span class="tok-ink" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="head">
+    <h1><span class="swap" id="title">Engineering pay, across twelve countries</span></h1>
+    <p>Base salary per country, converted to USD at 1 Nov 2026 rates. The box spans the middle half of employees, the whiskers run from the 10th to the 90th percentile, and the bar marks the median.</p>
+  </div>
+  <div class="actions"><button class="btn ghost">Export CSV</button><button class="btn primary">Add employee</button></div>
+
+  <section class="stats" aria-label="Summary">
+    <div class="stat"><span class="mono">Employees</span><b class="num" data-k="count">0</b></div>
+    <div class="stat"><span class="mono">Median base, USD</span><b class="num" data-k="median">0</b></div>
+    <div class="stat"><span class="mono">Spread, P90 / P10</span><b class="num" data-k="spread">0</b></div>
+    <div class="stat att"><span class="mono">Below band minimum</span><b class="num" data-k="below">0</b>
+      <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <g class="ring"><text font-family="Azeret Mono" font-size="9.4" letter-spacing="2.6" fill="currentColor"><textPath href="#circ">NEEDS A DECISION · NEEDS A DECISION · </textPath></text></g>
+        <circle cx="50" cy="50" r="27" fill="#DCDDF3" stroke="currentColor"/>
+        <path d="M40 51l7 7 14-16" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="plate p1" aria-labelledby="p1h">
+    <span class="reg tl" aria-hidden="true"></span><span class="reg br" aria-hidden="true"></span>
+    <span class="mono">Plate 1 · Distribution by country</span>
+    <h2 id="p1h">Where the pay sits</h2>
+    <div class="rows" id="rows"></div>
+    <div class="axis mono" aria-hidden="true"><span></span><div><span>$0</span><span>$80k</span><span>$160k</span></div><span></span></div>
+    <div class="legend mono"><span><i></i>Within band</span><span><i class="a"></i>Median below band</span>
+      <label><input type="checkbox" id="bandToggle"> Show band</label></div>
+    <div class="tip" id="tip" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="plate p2" aria-labelledby="p2h">
+    <span class="reg tl" aria-hidden="true"></span><span class="reg br" aria-hidden="true"></span>
+    <div class="plate-head"><span class="mono">Plate 2 · Employees, sorted by gap to band</span><span class="mono" id="countryFilter"></span></div>
+    <h2 id="p2h">Needs a decision</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Employee</th><th>Country</th><th>Level</th><th class="n">Base salary</th><th class="n"><button id="sortGap">Gap to band ↓</button></th><th>Status</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>
+    <div class="foot"><span class="mono" id="showing"></span><a href="#" class="link">Open all in Employees</a></div>
+  </section>
+
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <footer class="colophon mono"><span>Seeded demo data · 10,000 employees · 12 countries</span><span>Prototype · not connected to the API</span></footer>
+</main>
+
+<script>
+const COUNTRIES=[
+ ["United States",131,"USD",1,"$"],["Australia",95,"AUD",.66,"A$"],["Canada",92,"CAD",.735,"CA$"],["United Kingdom",89,"GBP",1.262,"£"],
+ ["Germany",84,"EUR",1.085,"€"],["Netherlands",82,"EUR",1.085,"€"],["Singapore",77,"SGD",.745,"S$"],["Poland",47,"PLN",.2515,"zł"],
+ ["India",31,"INR",.012,"₹"],["Brazil",29,"BRL",.2,"R$"],["Mexico",27,"MXN",.0582,"MX$"],["Philippines",18,"PHP",.0175,"₱"]];
+const DEPTS={Engineering:[1,3400,600],Sales:[.95,1900,400],Support:[.62,1500,500],Product:[1.05,600,40],Finance:[.85,550,90],People:[.78,500,70]};
+const ROLES={Engineering:["Site Reliability Engineer","DevOps Engineer","Senior Software Engineer","QA Engineer","Backend Engineer","Frontend Engineer","Mobile Engineer"],
+ Sales:["Account Executive","Sales Development Rep","Sales Director","Solutions Consultant"],Support:["Support Engineer","Customer Success Lead","Support Specialist"],
+ Product:["Product Manager","Senior Product Manager","Product Analyst"],Finance:["Data Analyst","Financial Analyst","Payroll Specialist"],People:["HR Generalist","Recruiter","People Partner"]};
+const NAMES=["Aoife Byrne","Wei Jie Tan","Priya Raman","Tomasz Nowak","Jonas Weber","Olivia Chen","Rafael Lima","Carlos Ruiz","Lena Hoffmann","Daniel Okafor","Miriam Schulz","Sofía Martínez","Hannah Koch","Arjun Mehta","Chloé Martin","Ji-woo Park","Emma de Vries","Lucas Almeida","Isabel Reyes","Noah Williams","Ava Thompson","Kenji Sato","Maya Iyer","Ethan Clarke"];
+const hash=s=>{let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return (h>>>0)/4294967295};
+const MAX=170, pct=v=>Math.max(0,Math.min(1,v/MAX));
+let dept="Engineering", country=null, sortDesc=true;
+
+function stats(d){
+  const [m]=DEPTS[d];
+  return COUNTRIES.map(([c,base])=>{const r=hash(d+c),med=base*m*(.94+r*.12);
+    return {c,med,p10:med*(.66+r*.05),p25:med*(.84+r*.03),p75:med*(1.15+r*.06),p90:med*(1.38+r*.1),bandMin:med*(1.02+(hash(c)-.5)*.12)}});
+}
+const fmtK=v=>"$"+Math.round(v)+"k";
+function renderTokens(){
+  const g=document.querySelector(".tokens");
+  Object.keys(DEPTS).forEach(d=>{const b=document.createElement("button");b.className="tok";b.textContent=d;b.setAttribute("aria-pressed",d===dept);
+    b.onclick=()=>setDept(d);g.appendChild(b)});
+  moveInk(false);
+}
+function moveInk(anim=true){
+  const ink=document.querySelector(".tok-ink"),on=[...document.querySelectorAll(".tok")].find(t=>t.textContent===dept);
+  if(!on)return; if(!anim)ink.style.transition="none";
+  ink.style.width=on.offsetWidth+"px";ink.style.transform=`translateX(${on.offsetLeft}px)`;
+  if(!anim)requestAnimationFrame(()=>ink.style.transition="");
+}
+function renderRows(first){
+  const rows=document.getElementById("rows"),S=stats(dept);
+  if(!rows.children.length){
+    S.forEach((s,i)=>{const el=document.createElement("div");el.className="bx";el.tabIndex=0;el.dataset.c=s.c;
+      el.innerHTML=`<span class="lab">${s.c}</span><span class="track"><span class="band"></span><span class="wh"></span><span class="box"></span><span class="med"></span></span><span class="v"></span>`;
+      el.addEventListener("mouseenter",()=>tip(el));el.addEventListener("focus",()=>tip(el));
+      el.addEventListener("mouseleave",untip);el.addEventListener("blur",untip);
+      el.addEventListener("click",()=>{country=country===s.c?null:s.c;renderTable(true)});
+      el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}});
+      rows.appendChild(el)});
+  }
+  [...rows.children].forEach((el,i)=>{const s=S[i],t=el.querySelector(".track");
+    el.classList.toggle("att",s.med<s.bandMin);el._s=s;
+    const q=k=>t.querySelector(k),P=v=>(pct(v)*100).toFixed(3)+"%";
+    const place=(k,a,b)=>{q(k).style.left=P(a);q(k).style.width=(Math.max(0,pct(b)-pct(a))*100).toFixed(3)+"%"};
+    const delay=first?(160+i*45):i*18;
+    [".wh",".box",".med",".band"].forEach(k=>q(k).style.transitionDelay=delay+"ms");
+    if(first){ // collapsed at the median, then the plate prints outward
+      [".wh",".box",".band"].forEach(k=>place(k,s.med,s.med));q(".med").style.left=P(s.med);q(".med").style.transform="scaleY(0)";t.offsetWidth;
+    }
+    place(".wh",s.p10,s.p90);place(".box",s.p25,s.p75);place(".band",s.bandMin,s.bandMin*1.45);
+    q(".med").style.left=P(s.med);q(".med").style.transform="scaleY(1)";
+    el.querySelector(".v").textContent=fmtK(s.med);
+  });
+}
+function tip(el){const s=el._s,T=document.getElementById("tip"),p=el.closest(".plate").getBoundingClientRect(),r=el.getBoundingClientRect();
+  T.innerHTML=`<span class="mono">${s.c} · ${dept}</span><dl><dt>P90</dt><dd>${fmtK(s.p90)}</dd><dt>P75</dt><dd>${fmtK(s.p75)}</dd><dt>Median</dt><dd>${fmtK(s.med)}</dd><dt>P25</dt><dd>${fmtK(s.p25)}</dd><dt>P10</dt><dd>${fmtK(s.p10)}</dd><dt>Band min</dt><dd>${fmtK(s.bandMin)}</dd></dl>`;
+  T.style.left=Math.min(r.left-p.left+140,p.width-240)+"px";T.style.top=(r.bottom-p.top+6)+"px";T.classList.add("on")}
+function untip(){document.getElementById("tip").classList.remove("on")}
+
+function people(){
+  const S=stats(dept),list=[];
+  NAMES.forEach((n,i)=>{const s=S[Math.floor(hash(n+dept)*S.length)],[c,,cur,fx,sym]=COUNTRIES.find(x=>x[0]===s.c);
+    const usd=s.bandMin*(.86+hash(n)*.13)*1000,role=ROLES[dept][i%ROLES[dept].length];
+    const local=Math.round(usd/fx/500)*500,u=local*fx;list.push({n,role,c,cur,lvl:"L"+(3+(i%3)),local:sym+local.toLocaleString("en-US"),usd:u,gap:u-s.bandMin*1000,id:"EMP-"+String(1000+Math.floor(hash(n+c)*8999)).padStart(5,"0")})});
+  return list.filter(p=>!country||p.c===country).sort((a,b)=>sortDesc?a.gap-b.gap:b.gap-a.gap);
+}
+function renderTable(anim){
+  const L=people(),tb=document.getElementById("tbody");
+  tb.innerHTML=L.slice(0,7).map((p,i)=>`<tr class="${anim?"enter":""}" style="animation-delay:${i*35}ms"><td>${p.n}<small>${p.role} · ${p.id}</small></td><td>${p.c}</td><td>${p.lvl}</td><td class="n">${p.local}${p.cur==="USD"?"":`<small>$${Math.round(p.usd).toLocaleString("en-US")}</small>`}</td><td class="n gap">${p.gap<0?"−":"+"}$${Math.abs(Math.round(p.gap/100)*100).toLocaleString("en-US")}</td><td>${p.gap<0?'<span class="stamp mono">Below</span>':'<span class="mono">In band</span>'}</td></tr>`).join("")
+   ||`<tr><td colspan="6" style="padding:28px 8px;color:var(--ink-2)">No employees below band in ${country} for ${dept}.</td></tr>`;
+  document.getElementById("countryFilter").textContent=country?country+" · clear":"";
+  document.getElementById("countryFilter").onclick=()=>{country=null;renderTable(true)};
+  document.getElementById("showing").textContent=`Showing ${Math.min(7,L.length)} of ${L.length}`;
+  document.querySelectorAll(".bx").forEach(b=>b.style.boxShadow=b.dataset.c===country?"inset 2px 0 0 var(--peri)":"");
+}
+function countTo(el,to,f){const from=el._v||0,t0=performance.now(),dur=matchMedia("(prefers-reduced-motion:reduce)").matches?1:700;
+  const step=t=>{const k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,4),v=from+(to-from)*e;el.textContent=f(v);if(k<1)requestAnimationFrame(step);else el._v=to};requestAnimationFrame(step)}
+function renderStats(){const S=stats(dept),[,count,below]=DEPTS[dept],meds=S.map(s=>s.med).sort((a,b)=>a-b),med=(meds[5]+meds[6])/2;
+  const spread=Math.max(...S.map(s=>s.p90))/Math.min(...S.map(s=>s.p10));
+  const q=k=>document.querySelector(`[data-k=${k}]`);
+  countTo(q("count"),count,v=>Math.round(v).toLocaleString("en-US"));
+  countTo(q("median"),med*1000,v=>"$"+(Math.round(v/100)*100).toLocaleString("en-US"));
+  countTo(q("spread"),spread,v=>v.toFixed(1)+"×");
+  countTo(q("below"),below,v=>Math.round(v).toLocaleString("en-US"));}
+function setDept(d){if(d===dept)return;dept=d;country=null;
+  document.querySelectorAll(".tok").forEach(t=>t.setAttribute("aria-pressed",t.textContent===d));moveInk();
+  const t=document.getElementById("title");t.animate([{opacity:1,filter:"blur(0)"},{opacity:0,filter:"blur(4px)"}],{duration:140}).onfinish=()=>{
+    t.textContent=`${d} pay, across twelve countries`;t.animate([{opacity:0,transform:"translateY(8px)",filter:"blur(4px)"},{opacity:1,transform:"none",filter:"blur(0)"}],{duration:420,easing:"cubic-bezier(.19,1,.22,1)"})};
+  renderRows(false);renderStats();renderTable(true);}
+
+document.getElementById("bandToggle").onchange=e=>document.getElementById("rows").classList.toggle("show-band",e.target.checked);
+document.getElementById("sortGap").onclick=()=>{sortDesc=!sortDesc;document.getElementById("sortGap").textContent="Gap to band "+(sortDesc?"↓":"↑");renderTable(true)};
+const dots=document.getElementById("dots");dots.addEventListener("pointermove",e=>dots.style.setProperty("--mx",(e.clientX-dots.getBoundingClientRect().left)+"px"));
+dots.addEventListener("pointerleave",()=>dots.style.setProperty("--mx","-200px"));
+addEventListener("resize",()=>moveInk(false));
+document.addEventListener("visibilitychange",()=>document.querySelector(".seal .ring").style.animationPlayState=document.hidden?"paused":"running");
+renderTokens();renderRows(true);renderStats();renderTable(true);
+setTimeout(()=>document.body.classList.remove("printing"),1400);
+</script>
+</body>
+</html>
