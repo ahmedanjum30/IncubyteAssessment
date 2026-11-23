@@ -28,5 +28,9 @@ export const signedUsd = (amount: number) =>
 const integer = new Intl.NumberFormat('en-US');
 export const count = (n: number) => integer.format(n);
 
-const dateFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const dateFormat = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
 export const date = (iso: string) => dateFormat.format(new Date(iso));

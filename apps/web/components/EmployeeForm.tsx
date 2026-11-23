@@ -89,15 +89,16 @@ export function EmployeeForm({ employee, onDone, onCancel }: EmployeeFormProps) 
     },
   });
 
-  const set = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const value = e.target.value;
-    setForm((f) => {
-      const next = { ...f, [field]: value };
-      if (field === 'department') next.jobTitle = JOB_TITLES[value as Department][0]!.title;
-      return next;
-    });
-    if (errors[field]) setErrors((er) => ({ ...er, [field]: undefined }));
-  };
+  const set =
+    (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const value = e.target.value;
+      setForm((f) => {
+        const next = { ...f, [field]: value };
+        if (field === 'department') next.jobTitle = JOB_TITLES[value as Department][0]!.title;
+        return next;
+      });
+      if (errors[field]) setErrors((er) => ({ ...er, [field]: undefined }));
+    };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -203,7 +204,10 @@ export function EmployeeForm({ employee, onDone, onCancel }: EmployeeFormProps) 
       {salaryChanged ? (
         <div className={`field ${styles.span2}`}>
           {label('salaryChangeReason', 'Reason for salary change (kept in history)')}
-          <input {...fieldProps('salaryChangeReason')} placeholder="e.g. Annual review, promotion" />
+          <input
+            {...fieldProps('salaryChangeReason')}
+            placeholder="e.g. Annual review, promotion"
+          />
         </div>
       ) : null}
       {errors.form ? (

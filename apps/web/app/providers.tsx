@@ -13,7 +13,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
             staleTime: 30_000,
             gcTime: 5 * 60_000,
             refetchOnWindowFocus: false,
-            retry: (count, error) => count < 2 && !(error instanceof ApiError && error.status < 500),
+            retry: (count, error) =>
+              count < 2 && !(error instanceof ApiError && error.status < 500),
           },
         },
       }),

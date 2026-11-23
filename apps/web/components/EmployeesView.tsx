@@ -36,7 +36,10 @@ export function EmployeesView() {
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const [, startTransition] = useTransition();
-  const query = useMemo(() => parseListParams(new URLSearchParams(searchParams.toString())), [searchParams]);
+  const query = useMemo(
+    () => parseListParams(new URLSearchParams(searchParams.toString())),
+    [searchParams],
+  );
   const [search, setSearch] = useState(query.q ?? '');
   const [adding, setAdding] = useState(false);
 
@@ -110,7 +113,9 @@ export function EmployeesView() {
           <select
             className="input"
             value={query.country ?? ''}
-            onChange={(e) => update({ country: (e.target.value || undefined) as EmployeeListQuery['country'] })}
+            onChange={(e) =>
+              update({ country: (e.target.value || undefined) as EmployeeListQuery['country'] })
+            }
           >
             <option value="">All countries</option>
             {COUNTRIES.map((c) => (
@@ -156,7 +161,9 @@ export function EmployeesView() {
           <select
             className="input"
             value={query.band ?? ''}
-            onChange={(e) => update({ band: (e.target.value || undefined) as EmployeeListQuery['band'] })}
+            onChange={(e) =>
+              update({ band: (e.target.value || undefined) as EmployeeListQuery['band'] })
+            }
           >
             <option value="">Any</option>
             <option value="below">Below band</option>
@@ -258,7 +265,9 @@ export function EmployeesView() {
                         <small className={tableStyles.gap}>{signedUsd(e.gapUsd)}</small>
                       </>
                     ) : (
-                      <span className="mono muted">{e.bandStatus === 'above' ? 'Above' : 'In band'}</span>
+                      <span className="mono muted">
+                        {e.bandStatus === 'above' ? 'Above' : 'In band'}
+                      </span>
                     )}
                   </td>
                 </tr>

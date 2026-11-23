@@ -18,7 +18,11 @@ export function EmployeeDetailView({ id }: { id: number }) {
   const [editing, setEditing] = useState(false);
   const [confirming, setConfirming] = useState(false);
 
-  const { data: e, error, isLoading } = useQuery({
+  const {
+    data: e,
+    error,
+    isLoading,
+  } = useQuery({
     queryKey: keys.employee(id),
     queryFn: ({ signal }) => api.employee(id, signal),
   });
@@ -45,7 +49,9 @@ export function EmployeeDetailView({ id }: { id: number }) {
     const notFound = error instanceof ApiError && error.status === 404;
     return (
       <main className={styles.page}>
-        <h1 className={styles.name}>{notFound ? 'Employee not found' : 'Could not load employee'}</h1>
+        <h1 className={styles.name}>
+          {notFound ? 'Employee not found' : 'Could not load employee'}
+        </h1>
         <p className="muted">
           {notFound ? 'They may have been removed.' : 'Check your connection and try again.'}{' '}
           <Link href="/employees" className="link">
@@ -98,7 +104,12 @@ export function EmployeeDetailView({ id }: { id: number }) {
         </div>
       </section>
 
-      <Plate id="band" title="Position in band" meta={`${e.countryName} · ${e.department} · L${e.level}`} className={styles.bandPlate}>
+      <Plate
+        id="band"
+        title="Position in band"
+        meta={`${e.countryName} · ${e.department} · L${e.level}`}
+        className={styles.bandPlate}
+      >
         {hasBand ? (
           <figure className={styles.bandFigure}>
             <div className={styles.bandTrack}>
@@ -112,8 +123,12 @@ export function EmployeeDetailView({ id }: { id: number }) {
               />
             </div>
             <figcaption className={`mono muted ${styles.bandScale}`}>
-              <span style={{ left: `${at(e.bandMin!)}%` }}>Min {money(e.bandMin!, e.currency)}</span>
-              <span style={{ left: `${at(e.bandMax!)}%` }}>Max {money(e.bandMax!, e.currency)}</span>
+              <span style={{ left: `${at(e.bandMin!)}%` }}>
+                Min {money(e.bandMin!, e.currency)}
+              </span>
+              <span style={{ left: `${at(e.bandMax!)}%` }}>
+                Max {money(e.bandMax!, e.currency)}
+              </span>
             </figcaption>
           </figure>
         ) : (
@@ -135,16 +150,24 @@ export function EmployeeDetailView({ id }: { id: number }) {
         </dl>
       </Plate>
 
-      <Plate id="history" title="Salary history" meta={`${e.history.length} changes`} className={styles.historyPlate}>
+      <Plate
+        id="history"
+        title="Salary history"
+        meta={`${e.history.length} changes`}
+        className={styles.historyPlate}
+      >
         {e.history.length === 0 ? (
-          <p className="muted">No changes since hire. Edits to salary are recorded here with their reason.</p>
+          <p className="muted">
+            No changes since hire. Edits to salary are recorded here with their reason.
+          </p>
         ) : (
           <ol className={styles.history}>
             {e.history.map((h) => (
               <li key={h.id}>
                 <span className="mono muted">{date(h.changedAt)}</span>
                 <span className="num">
-                  <s>{money(h.previousSalary, h.previousCurrency)}</s> → {money(h.newSalary, h.currency)}
+                  <s>{money(h.previousSalary, h.previousCurrency)}</s> →{' '}
+                  {money(h.newSalary, h.currency)}
                 </span>
                 <span className="muted">{h.reason ?? 'No reason given'}</span>
               </li>
@@ -154,7 +177,11 @@ export function EmployeeDetailView({ id }: { id: number }) {
       </Plate>
 
       <Dialog open={editing} onOpenChange={setEditing} title="Edit employee" wide>
-        <EmployeeForm employee={e} onCancel={() => setEditing(false)} onDone={() => setEditing(false)} />
+        <EmployeeForm
+          employee={e}
+          onCancel={() => setEditing(false)}
+          onDone={() => setEditing(false)}
+        />
       </Dialog>
 
       <Dialog

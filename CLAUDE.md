@@ -13,12 +13,12 @@ Salary management web app for ACME's HR Manager: manage salary data for ~10,000 
 
 ## Stack
 
-| Layer    | Choice                                  |
-| -------- | --------------------------------------- |
-| Backend  | NestJS (TypeScript)                     |
-| Frontend | Next.js (TypeScript, React)             |
-| Database | PostgreSQL                              |
-| Linting  | oxlint                                  |
+| Layer    | Choice                                       |
+| -------- | -------------------------------------------- |
+| Backend  | NestJS (TypeScript)                          |
+| Frontend | Next.js (TypeScript, React)                  |
+| Database | PostgreSQL                                   |
+| Linting  | oxlint                                       |
 | Deploy   | Docker Compose on a free Oracle Cloud server |
 
 Do not introduce a different framework, database or linter without asking first.

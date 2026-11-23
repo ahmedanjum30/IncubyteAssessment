@@ -37,7 +37,9 @@ export class InsightsService {
   }
 
   async distribution(filter: InsightFilter): Promise<CountryDistribution[]> {
-    const rows = await this.sql<(Omit<CountryDistribution, 'p10' | 'p25' | 'median' | 'p75' | 'p90'> & { p: number[] })[]>`
+    const rows = await this.sql<
+      (Omit<CountryDistribution, 'p10' | 'p25' | 'median' | 'p75' | 'p90'> & { p: number[] })[]
+    >`
       select
         country_code,
         country_name,

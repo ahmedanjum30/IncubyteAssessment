@@ -1,4 +1,9 @@
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   countryByCode,
   type EmployeeDetail,
@@ -35,9 +40,12 @@ export class EmployeesService {
     if (!current) throw new NotFoundException(`Employee ${id} not found`);
 
     const { salaryChangeReason, ...changes } = update;
-    const relocated = changes.countryCode !== undefined && changes.countryCode !== current.countryCode;
+    const relocated =
+      changes.countryCode !== undefined && changes.countryCode !== current.countryCode;
     if (relocated && changes.salary === undefined) {
-      throw new BadRequestException('Changing country changes the currency, so a new salary is required');
+      throw new BadRequestException(
+        'Changing country changes the currency, so a new salary is required',
+      );
     }
 
     const newSalary = changes.salary ?? current.salary;

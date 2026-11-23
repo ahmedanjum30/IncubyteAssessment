@@ -23,7 +23,9 @@ try {
   });
   await sql`analyze employees`;
 
-  console.warn(`Seeded ${employees.length} employees in ${Math.round(performance.now() - started)} ms`);
+  console.warn(
+    `Seeded ${employees.length} employees in ${Math.round(performance.now() - started)} ms`,
+  );
 } finally {
   await sql.end();
 }

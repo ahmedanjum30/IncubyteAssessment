@@ -1,4 +1,11 @@
-import { Global, Inject, Logger, Module, type OnApplicationShutdown, type OnModuleInit } from '@nestjs/common';
+import {
+  Global,
+  Inject,
+  Logger,
+  Module,
+  type OnApplicationShutdown,
+  type OnModuleInit,
+} from '@nestjs/common';
 import { loadConfig } from '../config.js';
 import { SQL, createSql, type Sql } from './client.js';
 import { migrate, syncReferenceData } from './migrate.js';

@@ -22,7 +22,11 @@ export function TopBar() {
       </Link>
       <nav aria-label="Main" className={styles.nav}>
         {NAV.map((item) => (
-          <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
             {item.label}
           </Link>
         ))}

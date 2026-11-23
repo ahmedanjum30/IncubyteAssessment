@@ -46,7 +46,9 @@ export class EmployeesRepository {
     const conditions: Fragment[] = [];
     if (query.q) {
       const like = `%${query.q.replace(/[\\%_]/g, '\\$&')}%`;
-      conditions.push(sql`(full_name ilike ${like} or email ilike ${like} or employee_code ilike ${like})`);
+      conditions.push(
+        sql`(full_name ilike ${like} or email ilike ${like} or employee_code ilike ${like})`,
+      );
     }
     if (query.country) conditions.push(sql`country_code = ${query.country}`);
     if (query.department) conditions.push(sql`department = ${query.department}`);

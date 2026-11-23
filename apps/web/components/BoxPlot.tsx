@@ -58,13 +58,20 @@ export function BoxPlot({ rows, selected, onSelect, showBand = false }: BoxPlotP
                 <span className={styles.label}>{r.label}</span>
                 <span className={styles.track} aria-hidden="true">
                   {showBand && r.bandMin !== null ? (
-                    <span className={styles.band} style={{ ...at(r.bandMin, r.bandMin * 1.41), ...delay }} />
+                    <span
+                      className={styles.band}
+                      style={{ ...at(r.bandMin, r.bandMin * 1.41), ...delay }}
+                    />
                   ) : null}
                   <span className={styles.whisker} style={{ ...at(r.p10, r.p90), ...delay }} />
                   <span className={styles.box} style={{ ...at(r.p25, r.p75), ...delay }} />
                   <span
                     className={styles.median}
-                    style={{ left: `${pos(r.median)}%`, transform: `scaleY(${printed ? 1 : 0})`, ...delay }}
+                    style={{
+                      left: `${pos(r.median)}%`,
+                      transform: `scaleY(${printed ? 1 : 0})`,
+                      ...delay,
+                    }}
                   />
                 </span>
                 <span className={`num ${styles.value}`}>{usdCompact(r.median)}</span>

@@ -46,14 +46,22 @@ describe.skipIf(!url)('against PostgreSQL', () => {
   });
 
   it('finds employees by partial name, case-insensitively', async () => {
-    const [first] = (await employees.list({ sort: 'name', order: 'asc', page: 1, pageSize: 1 })).items;
+    const [first] = (await employees.list({ sort: 'name', order: 'asc', page: 1, pageSize: 1 }))
+      .items;
     const fragment = first!.fullName.slice(1, 5).toLowerCase();
-    const found = await employees.list({ q: fragment, sort: 'name', order: 'asc', page: 1, pageSize: 100 });
+    const found = await employees.list({
+      q: fragment,
+      sort: 'name',
+      order: 'asc',
+      page: 1,
+      pageSize: 100,
+    });
     expect(found.items.map((e) => e.id)).toContain(first!.id);
   });
 
   it('keeps salary history when a salary changes', async () => {
-    const [someone] = (await employees.list({ sort: 'name', order: 'asc', page: 1, pageSize: 1 })).items;
+    const [someone] = (await employees.list({ sort: 'name', order: 'asc', page: 1, pageSize: 1 }))
+      .items;
     const updated = await employees.update(someone!.id, {
       salary: someone!.salary + 1000,
       salaryChangeReason: 'Promotion',

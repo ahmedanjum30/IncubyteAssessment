@@ -2,106 +2,106 @@
 name: ACME Pay
 description: Salary management for ACME's HR Manager, printed as one plate in a design annual.
 colors:
-  sheet: "#F5F4F6"
-  sheet-warm: "#FAF6F5"
-  sheet-green: "#EEF3EF"
-  ink: "#16181A"
-  ink-2: "#55585D"
-  hairline: "#C9C7C4"
-  hairline-soft: "#E3E1DE"
-  seal: "#DCDDF3"
-  periwinkle: "#4B4FA8"
-  periwinkle-ink: "#34377F"
-  danger: "#A3261A"
-  paper: "#FFFFFF"
+  sheet: '#F5F4F6'
+  sheet-warm: '#FAF6F5'
+  sheet-green: '#EEF3EF'
+  ink: '#16181A'
+  ink-2: '#55585D'
+  hairline: '#C9C7C4'
+  hairline-soft: '#E3E1DE'
+  seal: '#DCDDF3'
+  periwinkle: '#4B4FA8'
+  periwinkle-ink: '#34377F'
+  danger: '#A3261A'
+  paper: '#FFFFFF'
 typography:
   display:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "clamp(36px, 4.2vw, 58px)"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: 'clamp(36px, 4.2vw, 58px)'
     fontWeight: 400
     lineHeight: 1.02
-    letterSpacing: "-0.025em"
+    letterSpacing: '-0.025em'
   headline:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "clamp(34px, 3.8vw, 52px)"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: 'clamp(34px, 3.8vw, 52px)'
     fontWeight: 400
     lineHeight: 1.03
-    letterSpacing: "-0.025em"
+    letterSpacing: '-0.025em'
   dialog:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "28px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '28px'
     fontWeight: 400
-    letterSpacing: "-0.02em"
+    letterSpacing: '-0.02em'
   stat:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "34px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '34px'
     fontWeight: 400
     lineHeight: 1.1
-    letterSpacing: "-0.02em"
+    letterSpacing: '-0.02em'
   title:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "19px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '19px'
     fontWeight: 500
     lineHeight: 1.3
-    letterSpacing: "-0.01em"
+    letterSpacing: '-0.01em'
   brand:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "17px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '17px'
     fontWeight: 600
   body:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "15px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '15px'
     fontWeight: 400
     lineHeight: 1.5
   table:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "14px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '14px'
     fontWeight: 400
   small:
-    fontFamily: "Schibsted Grotesk, system-ui, sans-serif"
-    fontSize: "12px"
+    fontFamily: 'Schibsted Grotesk, system-ui, sans-serif'
+    fontSize: '12px'
     fontWeight: 400
   label:
-    fontFamily: "Azeret Mono, ui-monospace, monospace"
-    fontSize: "11px"
+    fontFamily: 'Azeret Mono, ui-monospace, monospace'
+    fontSize: '11px'
     fontWeight: 400
-    letterSpacing: "0.14em"
+    letterSpacing: '0.14em'
 rounded:
-  none: "0px"
-  pill: "999px"
+  none: '0px'
+  pill: '999px'
 spacing:
-  xs: "6px"
-  sm: "10px"
-  md: "18px"
-  lg: "26px"
-  gutter: "40px"
+  xs: '6px'
+  sm: '10px'
+  md: '18px'
+  lg: '26px'
+  gutter: '40px'
 components:
   button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.sheet}"
-    rounded: "{rounded.none}"
-    padding: "12px 18px"
+    backgroundColor: '{colors.ink}'
+    textColor: '{colors.sheet}'
+    rounded: '{rounded.none}'
+    padding: '12px 18px'
   button-primary-hover:
-    backgroundColor: "{colors.sheet}"
-    textColor: "{colors.ink}"
+    backgroundColor: '{colors.sheet}'
+    textColor: '{colors.ink}'
   button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "12px 18px"
+    backgroundColor: 'transparent'
+    textColor: '{colors.ink}'
+    rounded: '{rounded.none}'
+    padding: '12px 18px'
   token:
-    backgroundColor: "#FFFFFF99"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
-    padding: "7px 11px"
+    backgroundColor: '#FFFFFF99'
+    textColor: '{colors.ink}'
+    typography: '{typography.label}'
+    padding: '7px 11px'
   token-active:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.sheet}"
+    backgroundColor: '{colors.ink}'
+    textColor: '{colors.sheet}'
   stamp:
-    backgroundColor: "{colors.seal}"
-    textColor: "{colors.periwinkle-ink}"
-    rounded: "{rounded.pill}"
-    typography: "{typography.label}"
+    backgroundColor: '{colors.seal}'
+    textColor: '{colors.periwinkle-ink}'
+    rounded: '{rounded.pill}'
+    typography: '{typography.label}'
 ---
 
 # Design System: ACME Pay
@@ -119,6 +119,7 @@ The org's pay is printed as one plate in a design annual. A near-white sheet is 
 The sheet is never flat neutral: it drifts warm at the top-left and green at the bottom-right, so ink reads as printed. Ink carries almost everything. One periwinkle is reserved for anything that needs a decision.
 
 **Key Characteristics:**
+
 - Near-white tinted sheet, ink text, 1px hairlines, zero radius.
 - One grotesque for everything, plus mono uppercase labels for metadata.
 - Periwinkle appears only on "needs attention" states (below band, active selection).
@@ -130,12 +131,15 @@ The sheet is never flat neutral: it drifts warm at the top-left and green at the
 An ink-on-paper palette with a single attention colour.
 
 ### Primary
+
 - **Plate Ink** (#16181A): text, primary buttons, active tokens, chart strokes, the 1px rule above the stats row.
 
 ### Secondary
+
 - **Decision Periwinkle** (#4B4FA8, text #34377F on #DCDDF3 seal): below-band states, the median of an at-risk country, selection markers, focus rings. Nothing decorative.
 
 ### Neutral
+
 - **Annual Sheet** (#F5F4F6), drifting to **Warm Corner** (#FAF6F5) and **Green Corner** (#EEF3EF) through two large radial gradients on `body`.
 - **Second Ink** (#55585D): secondary text and labels (≥ 6:1 on the sheet).
 - **Hairline** (#C9C7C4): plate borders and section rules. **Soft Hairline** (#E3E1DE): row dividers.
@@ -143,6 +147,7 @@ An ink-on-paper palette with a single attention colour.
 - **Paper** (#FFFFFF): inputs, box-plot boxes and other figures that sit on the white-washed plates.
 
 ### Named Rules
+
 **The One Seal Rule.** Periwinkle marks only what needs a decision. If everything is highlighted, nothing is.
 
 ## Typography
@@ -153,6 +158,7 @@ An ink-on-paper palette with a single attention colour.
 **Character:** a confident newspaper grotesque at light display sizes, with a precise mono for the registration-furniture labels.
 
 ### Hierarchy
+
 - **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): the Overview headline.
 - **Headline** (400, clamp(34px, 3.8vw, 52px)): headlines on Employees, Insights and the employee page. **Dialog** titles use 28px.
 - **Stat** (400, 34px, 28px on phones, 1.1): figures in the stats row, proportional numerals.
@@ -163,6 +169,7 @@ An ink-on-paper palette with a single attention colour.
 All sizes are CSS custom properties (`--fs-*`) in `apps/web/app/globals.css`; components never hard-code a size.
 
 ### Named Rules
+
 **The Tabular Rule.** Numbers in tables and charts use `font-variant-numeric: tabular-nums` so columns align. Display figures (the stats row) keep proportional numerals, because tabular commas open visible gaps at 34px. Money shows its local currency first and the USD equivalent beneath in Second Ink.
 
 ## Layout
@@ -184,29 +191,37 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 ## Components
 
 ### Buttons
+
 - **Primary:** ink fill, sheet text, 12px 18px, 1px ink border. On hover the colours invert in 0.1s.
 - **Ghost:** transparent with a 1px ink border, inverting to an ink fill on hover.
 - **Focus:** 2px periwinkle outline, 3px offset, on every interactive element.
 
 ### Tokens (filters)
+
 - Mono label, 1px hairline border, white wash. The active token sits on an ink slab that slides between tokens (0.45s, cubic-bezier(.19,1,.22,1)).
 
 ### Selection
+
 - A selected box-plot row tints its background with the seal colour and sets its label in Periwinkle Ink at 500 weight. No side stripes.
 
 ### Plates
+
 - White-washed panels with hairline borders and crosshair corners. The header row puts the 19px title on the left and mono meta ("Plate 1 · by country") on the right, on one baseline. Nothing sits above the title.
 
 ### Tables
+
 - 1px ink rule under the header, soft hairline row dividers, tabular numerals, money right-aligned. Rows enter with a short rise (0.5s) when data changes.
 
 ### Stamps
+
 - Pill with a seal fill and periwinkle border, carrying a mono label ("Below").
 
 ### Box plot (signature)
+
 - Whisker line from P10 to P90, a white box from P25 to P75 with a 1px ink border, and a 2px median bar. At-risk rows fill the box with seal and turn the median periwinkle. The plot animates left/width (0.7s, staggered 45ms per row) so the borders stay crisp.
 
 ### Inputs and dialogs
+
 - Inputs: 1px hairline border, white fill, zero radius, 10px 12px padding. Focus turns the border ink and adds the periwinkle ring. Errors show Error Red text beneath the field.
 - Dialogs: a centred sheet-coloured panel with hairline border and plate crosshairs over a 40% ink scrim. They fade and rise 8px in 0.25s.
 
@@ -219,11 +234,13 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 ## Do's and Don'ts
 
 ### Do:
+
 - **Do** keep table and chart numbers tabular, and show every money value in local currency with USD beneath it.
 - **Do** use periwinkle only for states that need a decision.
 - **Do** use standard controls (buttons, selects, inputs, tables) in the plate vocabulary.
 
 ### Don't:
+
 - **Don't** use rounded cards, drop shadows on plates, or gradient text.
 - **Don't** add a second accent colour; state colour other than Error Red is periwinkle.
 - **Don't** put a kicker or eyebrow above any heading. Metadata sits beside the title, never above it.

@@ -4,7 +4,13 @@ import { parseListParams, toListParams } from './listParams';
 describe('employee list URL state', () => {
   it('round-trips filters through the query string, omitting defaults', () => {
     const query = parseListParams(new URLSearchParams('country=DE&band=below&sort=gap&page=3'));
-    expect(query).toMatchObject({ country: 'DE', band: 'below', sort: 'gap', page: 3, pageSize: 25 });
+    expect(query).toMatchObject({
+      country: 'DE',
+      band: 'below',
+      sort: 'gap',
+      page: 3,
+      pageSize: 25,
+    });
     expect(toListParams(query)).toBe('country=DE&band=below&sort=gap&page=3');
   });
 

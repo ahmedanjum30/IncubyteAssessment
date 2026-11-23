@@ -22,12 +22,12 @@ packages/shared ─┬─► apps/api   reference data, pay band rules, zod sche
 
 ## Components
 
-| Service | Responsibility |
-| --- | --- |
-| `web` | Next.js App Router UI. The pages are static shells that render instantly; data loads on the client through TanStack Query against `/api`. |
-| `api` | NestJS modules: `employees` (CRUD and history), `insights` (aggregates), `meta`/`health`. Migrations and reference data sync run on boot. |
-| `db` | `employees`, `salary_changes`, `pay_bands`, `countries`, `fx_rates`, plus one view, `employee_pay`. |
-| `proxy` | Caddy is the only public port. It handles automatic HTTPS when `SITE_ADDRESS` is a domain. |
+| Service | Responsibility                                                                                                                            |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `web`   | Next.js App Router UI. The pages are static shells that render instantly; data loads on the client through TanStack Query against `/api`. |
+| `api`   | NestJS modules: `employees` (CRUD and history), `insights` (aggregates), `meta`/`health`. Migrations and reference data sync run on boot. |
+| `db`    | `employees`, `salary_changes`, `pay_bands`, `countries`, `fx_rates`, plus one view, `employee_pay`.                                       |
+| `proxy` | Caddy is the only public port. It handles automatic HTTPS when `SITE_ADDRESS` is a domain.                                                |
 
 ## Data model
 
@@ -48,31 +48,31 @@ Salaries are stored in **local currency**, because that is what an HR manager ag
 
 ## Decisions and trade-offs
 
-| Decision | Why | Trade-off |
-| --- | --- | --- |
-| **PostgreSQL** over SQLite | The product questions are percentiles and group-bys, which Postgres has natively (`percentile_cont`). It also gives concurrent writes, trigram search and a real server for Docker. | One more container than SQLite. |
-| **postgres.js + plain SQL** instead of an ORM | The interesting part of this app is aggregate SQL, so it stays readable in reviews. postgres.js is the fastest Node driver and composes safe fragments for dynamic filters. | No generated schema types; a few row types are declared by hand in `@acme/shared`. |
-| **Hand-rolled migrator** (~30 lines) | Ordered `.sql` files and a `schema_migrations` table, inside a transaction with an advisory lock so replicas can boot together. | No down migrations. Forward-only is the norm for production databases anyway. |
-| **Fastify adapter** | Lower per-request overhead than Express, with the same Nest programming model. | Some Express-only middleware isn't usable (none needed here). |
-| **zod in a shared package** | One schema validates the form in the browser and the request in the API, and gives both sides the same types. | Not the Nest-default class-validator, but less code and no decorators on DTOs. |
-| **Offset pagination** | 10k rows and page jumps ("page 40 of 48") are what HR expects. Count and page run in parallel. | Keyset pagination would scale further. Not needed at this size. |
-| **Client-side data fetching** | Pages are static and cached at the edge. Filters and sorting are interactive, and `keepPreviousData` keeps the table steady while the next page loads. | The first data paint waits for one API round trip (~10–40 ms). |
-| **Seeded FX table** | Reproducible numbers and deterministic tests. | Rates must be updated by hand or by a later job. |
-| **Bands per country × department × level** | This matches how pay bands are usually set, and makes "below band" meaningful. | Bands are generated, not real. Editing them in the UI is out of scope. |
+| Decision                                      | Why                                                                                                                                                                                 | Trade-off                                                                          |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **PostgreSQL** over SQLite                    | The product questions are percentiles and group-bys, which Postgres has natively (`percentile_cont`). It also gives concurrent writes, trigram search and a real server for Docker. | One more container than SQLite.                                                    |
+| **postgres.js + plain SQL** instead of an ORM | The interesting part of this app is aggregate SQL, so it stays readable in reviews. postgres.js is the fastest Node driver and composes safe fragments for dynamic filters.         | No generated schema types; a few row types are declared by hand in `@acme/shared`. |
+| **Hand-rolled migrator** (~30 lines)          | Ordered `.sql` files and a `schema_migrations` table, inside a transaction with an advisory lock so replicas can boot together.                                                     | No down migrations. Forward-only is the norm for production databases anyway.      |
+| **Fastify adapter**                           | Lower per-request overhead than Express, with the same Nest programming model.                                                                                                      | Some Express-only middleware isn't usable (none needed here).                      |
+| **zod in a shared package**                   | One schema validates the form in the browser and the request in the API, and gives both sides the same types.                                                                       | Not the Nest-default class-validator, but less code and no decorators on DTOs.     |
+| **Offset pagination**                         | 10k rows and page jumps ("page 40 of 48") are what HR expects. Count and page run in parallel.                                                                                      | Keyset pagination would scale further. Not needed at this size.                    |
+| **Client-side data fetching**                 | Pages are static and cached at the edge. Filters and sorting are interactive, and `keepPreviousData` keeps the table steady while the next page loads.                              | The first data paint waits for one API round trip (~10–40 ms).                     |
+| **Seeded FX table**                           | Reproducible numbers and deterministic tests.                                                                                                                                       | Rates must be updated by hand or by a later job.                                   |
+| **Bands per country × department × level**    | This matches how pay bands are usually set, and makes "below band" meaningful.                                                                                                      | Bands are generated, not real. Editing them in the UI is out of scope.             |
 
 ## Performance
 
 Measured locally with 10,000 seeded employees (warm, via 127.0.0.1):
 
-| Request | Time |
-| --- | --- |
-| `GET /api/employees` (25 rows + total) | ~6 ms |
-| Search + country filter + salary sort | ~7 ms |
-| Band filter, sort by gap, page 40 | ~14 ms |
-| `GET /api/insights/summary` (all 10k) | ~10–20 ms |
-| `GET /api/insights/distribution` (percentiles × 12 countries) | ~11 ms |
-| `GET /api/insights/job-titles` | ~22 ms |
-| Seed 10,000 employees | ~0.9 s |
+| Request                                                       | Time      |
+| ------------------------------------------------------------- | --------- |
+| `GET /api/employees` (25 rows + total)                        | ~6 ms     |
+| Search + country filter + salary sort                         | ~7 ms     |
+| Band filter, sort by gap, page 40                             | ~14 ms    |
+| `GET /api/insights/summary` (all 10k)                         | ~10–20 ms |
+| `GET /api/insights/distribution` (percentiles × 12 countries) | ~11 ms    |
+| `GET /api/insights/job-titles`                                | ~22 ms    |
+| Seed 10,000 employees                                         | ~0.9 s    |
 
 What makes it fast:
 

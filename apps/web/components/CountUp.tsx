@@ -38,9 +38,5 @@ export function CountUp({ value, format, duration = 700 }: CountUpProps) {
     };
   }, [value, format, duration]);
 
-  return (
-    <span ref={ref}>
-      {value === null || value === undefined ? '—' : format(0)}
-    </span>
-  );
+  return <span ref={ref}>{value === null || value === undefined ? '—' : format(0)}</span>;
 }

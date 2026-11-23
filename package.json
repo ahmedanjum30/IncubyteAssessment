@@ -2,8 +2,13 @@
   "name": "acme-pay",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*", "apps/*"],
-  "engines": { "node": ">=22" },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "npm run build -w @acme/shared && npm run build -w @acme/api && npm run build -w @acme/web",
     "dev:api": "npm run dev -w @acme/api",
@@ -13,7 +18,8 @@
     "lint": "oxlint",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run build -w @acme/shared && npm run test --workspaces --if-present",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
     "oxlint": "^1.94.0",

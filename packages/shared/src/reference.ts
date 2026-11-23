@@ -34,7 +34,10 @@ export type Department = (typeof DEPARTMENTS)[number];
 export const LEVELS = [1, 2, 3, 4, 5, 6] as const;
 export type Level = (typeof LEVELS)[number];
 
-export const JOB_TITLES: Record<Department, ReadonlyArray<{ title: string; levels: readonly Level[] }>> = {
+export const JOB_TITLES: Record<
+  Department,
+  ReadonlyArray<{ title: string; levels: readonly Level[] }>
+> = {
   Engineering: [
     { title: 'Software Engineer', levels: [1, 2, 3] },
     { title: 'Senior Software Engineer', levels: [4] },

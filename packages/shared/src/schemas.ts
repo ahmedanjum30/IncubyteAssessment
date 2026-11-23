@@ -23,16 +23,26 @@ export const employeeInputSchema = z.object({
     .positive('Salary must be greater than zero')
     .max(1_000_000_000)
     .transform((n) => Math.round(n * 100) / 100),
-  hiredOn: z.iso.date('Enter a valid date').refine((d) => d <= new Date().toISOString().slice(0, 10), {
-    message: 'Hire date cannot be in the future',
-  }),
+  hiredOn: z.iso
+    .date('Enter a valid date')
+    .refine((d) => d <= new Date().toISOString().slice(0, 10), {
+      message: 'Hire date cannot be in the future',
+    }),
 });
 
 export const employeeUpdateSchema = employeeInputSchema.partial().extend({
   salaryChangeReason: trimmed(2, 200, 'Reason').optional(),
 });
 
-export const SORT_FIELDS = ['name', 'salary', 'salaryUsd', 'level', 'hiredOn', 'country', 'gap'] as const;
+export const SORT_FIELDS = [
+  'name',
+  'salary',
+  'salaryUsd',
+  'level',
+  'hiredOn',
+  'country',
+  'gap',
+] as const;
 
 const optionalText = z
   .string()

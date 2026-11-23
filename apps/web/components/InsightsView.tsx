@@ -1,6 +1,12 @@
 'use client';
 
-import { COUNTRIES, DEPARTMENTS, type CountryCode, type Department, type JobTitleStats } from '@acme/shared';
+import {
+  COUNTRIES,
+  DEPARTMENTS,
+  type CountryCode,
+  type Department,
+  type JobTitleStats,
+} from '@acme/shared';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
@@ -58,8 +64,8 @@ export function InsightsView() {
       <div className={styles.head}>
         <h1>What we pay for each role</h1>
         <p className="muted">
-          Minimum, median and maximum annual base salary per job title, in USD. Use the filters to compare a
-          role across countries or within one market.
+          Minimum, median and maximum annual base salary per job title, in USD. Use the filters to
+          compare a role across countries or within one market.
         </p>
       </div>
 
@@ -94,7 +100,11 @@ export function InsightsView() {
         </label>
         <label className="field">
           <span>Sort by</span>
-          <select className="input" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
+          <select
+            className="input"
+            value={sort}
+            onChange={(e) => setSort(e.target.value as SortKey)}
+          >
             {SORTS.map((s) => (
               <option key={s.key} value={s.key}>
                 {s.label}
@@ -131,7 +141,11 @@ export function InsightsView() {
         </div>
       </section>
 
-      <Plate id="titles" title={scope ? `Job titles, ${scope}` : 'Job titles'} meta={`${rows.length} roles`}>
+      <Plate
+        id="titles"
+        title={scope ? `Job titles, ${scope}` : 'Job titles'}
+        meta={`${rows.length} roles`}
+      >
         <div className={tableStyles.wrap}>
           <table className={`${tableStyles.table} ${titles.isPlaceholderData ? styles.stale : ''}`}>
             <thead>
@@ -200,7 +214,10 @@ export function InsightsView() {
                           animationDelay: `${Math.min(i, 20) * 25}ms`,
                         }}
                       />
-                      <span className={styles.median} style={{ left: `${percentOf(r.medianUsd, max)}%` }} />
+                      <span
+                        className={styles.median}
+                        style={{ left: `${percentOf(r.medianUsd, max)}%` }}
+                      />
                     </span>
                   </td>
                   <td className={tableStyles.n}>{usd(r.medianUsd)}</td>

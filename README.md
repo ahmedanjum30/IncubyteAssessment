@@ -4,8 +4,8 @@ Salary management for ACME's HR Manager: keep salary records for 10,000 employee
 
 ![Overview](docs/screenshots/overview.png)
 
-| Employees | Employee | Pay insights |
-| --- | --- | --- |
+| Employees                                    | Employee                                   | Pay insights                               |
+| -------------------------------------------- | ------------------------------------------ | ------------------------------------------ |
 | ![Employees](docs/screenshots/employees.png) | ![Employee](docs/screenshots/employee.png) | ![Insights](docs/screenshots/insights.png) |
 
 ## What it does
@@ -19,14 +19,14 @@ Read [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) for scope and for what was del
 
 ## Stack
 
-| | |
-| --- | --- |
-| API | NestJS 12 on Fastify, postgres.js with plain SQL, zod validation |
-| UI | Next.js 16 (App Router), React 19, TanStack Query, Radix Dialog, CSS modules |
-| Database | PostgreSQL 17 |
-| Shared | `@acme/shared`: reference data, pay band rules, zod schemas used by both sides |
-| Tooling | npm workspaces, TypeScript (strict), oxlint, Prettier, Vitest |
-| Deploy | Docker Compose with Caddy on an Oracle Cloud free-tier Ampere (ARM64) VM |
+|          |                                                                                |
+| -------- | ------------------------------------------------------------------------------ |
+| API      | NestJS 12 on Fastify, postgres.js with plain SQL, zod validation               |
+| UI       | Next.js 16 (App Router), React 19, TanStack Query, Radix Dialog, CSS modules   |
+| Database | PostgreSQL 17                                                                  |
+| Shared   | `@acme/shared`: reference data, pay band rules, zod schemas used by both sides |
+| Tooling  | npm workspaces, TypeScript (strict), oxlint, Prettier, Vitest                  |
+| Deploy   | Docker Compose with Caddy on an Oracle Cloud free-tier Ampere (ARM64) VM       |
 
 ```
 apps/api        NestJS API, migrations, seed
@@ -81,19 +81,19 @@ CI runs all of it against a Postgres service and builds both images for amd64 an
 
 All endpoints are under `/api`.
 
-| Method | Path | Purpose |
-| --- | --- | --- |
-| GET | `/employees?q&country&department&jobTitle&band&sort&order&page&pageSize` | Paged, filtered list with USD and band status |
-| GET | `/employees/:id` | One employee with salary history |
-| POST | `/employees` | Create (salary in local currency) |
-| PATCH | `/employees/:id` | Update; a salary change writes history (`salaryChangeReason` optional) |
-| DELETE | `/employees/:id` | Delete |
-| GET | `/insights/summary?country&department` | Headcount, median, average, below-band count |
-| GET | `/insights/distribution?country&department` | Percentiles per country |
-| GET | `/insights/job-titles?country&department` | Min/median/average/max per job title |
-| GET | `/insights/below-band?country&department&limit` | Largest gaps first |
-| GET | `/meta` | Countries, currencies, FX, departments, job titles |
-| GET | `/health` | Liveness, including a database ping |
+| Method | Path                                                                     | Purpose                                                                |
+| ------ | ------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| GET    | `/employees?q&country&department&jobTitle&band&sort&order&page&pageSize` | Paged, filtered list with USD and band status                          |
+| GET    | `/employees/:id`                                                         | One employee with salary history                                       |
+| POST   | `/employees`                                                             | Create (salary in local currency)                                      |
+| PATCH  | `/employees/:id`                                                         | Update; a salary change writes history (`salaryChangeReason` optional) |
+| DELETE | `/employees/:id`                                                         | Delete                                                                 |
+| GET    | `/insights/summary?country&department`                                   | Headcount, median, average, below-band count                           |
+| GET    | `/insights/distribution?country&department`                              | Percentiles per country                                                |
+| GET    | `/insights/job-titles?country&department`                                | Min/median/average/max per job title                                   |
+| GET    | `/insights/below-band?country&department&limit`                          | Largest gaps first                                                     |
+| GET    | `/meta`                                                                  | Countries, currencies, FX, departments, job titles                     |
+| GET    | `/health`                                                                | Liveness, including a database ping                                    |
 
 Validation errors return `400` with `issues: [{ path, message }]`, a duplicate email returns `409`, and an unknown id returns `404`.
 

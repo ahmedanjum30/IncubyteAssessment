@@ -7,7 +7,12 @@ export function Seal({ className }: { className?: string }) {
         <path id="seal-ring" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
       </defs>
       <g className={styles.ring}>
-        <text fontSize="9.4" letterSpacing="2.6" fill="currentColor" style={{ fontFamily: 'var(--font-mono)' }}>
+        <text
+          fontSize="9.4"
+          letterSpacing="2.6"
+          fill="currentColor"
+          style={{ fontFamily: 'var(--font-mono)' }}
+        >
           <textPath href="#seal-ring">NEEDS A DECISION · NEEDS A DECISION · </textPath>
         </text>
       </g>

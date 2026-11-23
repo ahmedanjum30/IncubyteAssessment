@@ -50,8 +50,7 @@ body {
   font: var(--fs-body) / 1.5 var(--font-sans);
   background:
     radial-gradient(1200px 700px at -10% -10%, var(--warm), transparent 60%),
-    radial-gradient(1000px 700px at 110% 110%, var(--green), transparent 60%),
-    var(--sheet);
+    radial-gradient(1000px 700px at 110% 110%, var(--green), transparent 60%), var(--sheet);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
@@ -203,8 +202,10 @@ select.input {
   appearance: none;
   padding-right: 34px;
   background:
-    linear-gradient(45deg, transparent 50%, var(--ink) 50%) calc(100% - 17px) 50% / 5px 5px no-repeat,
-    linear-gradient(-45deg, transparent 50%, var(--ink) 50%) calc(100% - 12px) 50% / 5px 5px no-repeat,
+    linear-gradient(45deg, transparent 50%, var(--ink) 50%) calc(100% - 17px) 50% / 5px 5px
+      no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--ink) 50%) calc(100% - 12px) 50% / 5px 5px
+      no-repeat,
     var(--paper);
 }
 

@@ -82,15 +82,21 @@ export function OverviewView() {
           {label}, across twelve countries
         </h1>
         <p className="muted">
-          Annual base salary converted to USD at fixed 1 Nov 2026 rates. Each box spans the middle half of
-          employees, the whiskers run from the 10th to the 90th percentile, and the bar marks the median.
+          Annual base salary converted to USD at fixed 1 Nov 2026 rates. Each box spans the middle
+          half of employees, the whiskers run from the 10th to the 90th percentile, and the bar
+          marks the median.
         </p>
       </div>
       <div className={styles.filters}>
-        <Tokens label="Department" options={TOKENS} value={dept} onChange={(d) => {
+        <Tokens
+          label="Department"
+          options={TOKENS}
+          value={dept}
+          onChange={(d) => {
             setDept(d);
             setCountry(null);
-          }} />
+          }}
+        />
       </div>
 
       <section className={styles.stats} aria-label="Summary" aria-busy={summary.isFetching}>
@@ -145,8 +151,12 @@ export function OverviewView() {
             <i className={`${styles.key} ${styles.keyAttention}`} /> Median below band
           </span>
           <label className={styles.toggle}>
-            <input type="checkbox" checked={showBand} onChange={(e) => setShowBand(e.target.checked)} /> Show
-            band
+            <input
+              type="checkbox"
+              checked={showBand}
+              onChange={(e) => setShowBand(e.target.checked)}
+            />{' '}
+            Show band
           </label>
         </div>
       </Plate>
@@ -167,7 +177,11 @@ export function OverviewView() {
       >
         <BelowBandTable
           rows={below.data ?? []}
-          empty={below.isLoading ? 'Loading…' : `No one is below band${countryName ? ` in ${countryName}` : ''}.`}
+          empty={
+            below.isLoading
+              ? 'Loading…'
+              : `No one is below band${countryName ? ` in ${countryName}` : ''}.`
+          }
         />
         <div className={styles.foot}>
           <span className="mono muted">

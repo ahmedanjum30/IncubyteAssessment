@@ -48,13 +48,17 @@ describe('EmployeesService', () => {
   it('records a salary change with the old value, new value and reason', async () => {
     await service.update(7, { salary: 66_000, salaryChangeReason: 'Annual review' });
 
-    expect(repo.update).toHaveBeenCalledWith(7, { salary: 66_000 }, {
-      previousSalary: 61_000,
-      previousCurrency: 'EUR',
-      newSalary: 66_000,
-      currency: 'EUR',
-      reason: 'Annual review',
-    });
+    expect(repo.update).toHaveBeenCalledWith(
+      7,
+      { salary: 66_000 },
+      {
+        previousSalary: 61_000,
+        previousCurrency: 'EUR',
+        newSalary: 66_000,
+        currency: 'EUR',
+        reason: 'Annual review',
+      },
+    );
   });
 
   it('does not write history when the salary is unchanged', async () => {
@@ -63,7 +67,9 @@ describe('EmployeesService', () => {
   });
 
   it('requires a new salary when an employee moves country, and records the currency switch', async () => {
-    await expect(service.update(7, { countryCode: 'GB' })).rejects.toBeInstanceOf(BadRequestException);
+    await expect(service.update(7, { countryCode: 'GB' })).rejects.toBeInstanceOf(
+      BadRequestException,
+    );
 
     await service.update(7, { countryCode: 'GB', salary: 54_000 });
     expect(repo.update).toHaveBeenLastCalledWith(
@@ -75,9 +81,9 @@ describe('EmployeesService', () => {
 
   it('turns a duplicate email into a conflict instead of a server error', async () => {
     repo.insert.mockRejectedValueOnce(Object.assign(new Error('duplicate'), { code: '23505' }));
-    await expect(
-      service.create({ ...lena, level: 3, salary: 61_000 }),
-    ).rejects.toBeInstanceOf(ConflictException);
+    await expect(service.create({ ...lena, level: 3, salary: 61_000 })).rejects.toBeInstanceOf(
+      ConflictException,
+    );
   });
 
   it('reports missing employees as not found', async () => {

@@ -1,13 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript",
-    "react",
-    "jsx-a11y",
-    "import",
-    "vitest",
-    "nextjs"
-  ],
+  "plugins": ["typescript", "react", "jsx-a11y", "import", "vitest", "nextjs"],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -17,10 +10,7 @@
     "no-console": [
       "warn",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ],
     "typescript/no-explicit-any": "error",
@@ -34,10 +24,7 @@
     "import/no-unassigned-import": [
       "warn",
       {
-        "allow": [
-          "reflect-metadata",
-          "**/*.css"
-        ]
+        "allow": ["reflect-metadata", "**/*.css"]
       }
     ],
     "no-await-in-loop": "off",
