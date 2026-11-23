@@ -1,0 +1,53 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "react",
+    "jsx-a11y",
+    "import",
+    "vitest",
+    "nextjs"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "typescript/no-explicit-any": "error",
+    "react/react-in-jsx-scope": "off",
+    "typescript/no-extraneous-class": [
+      "warn",
+      {
+        "allowWithDecorator": true
+      }
+    ],
+    "import/no-unassigned-import": [
+      "warn",
+      {
+        "allow": [
+          "reflect-metadata",
+          "**/*.css"
+        ]
+      }
+    ],
+    "no-await-in-loop": "off",
+    "vitest/require-mock-type-parameters": "off"
+  },
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.next/**",
+    "design/prototype/**",
+    ".impeccable/**",
+    "**/next-env.d.ts"
+  ]
+}

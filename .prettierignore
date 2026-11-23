@@ -1,0 +1,6 @@
+dist
+.next
+coverage
+.impeccable
+design/prototype
+package-lock.json
