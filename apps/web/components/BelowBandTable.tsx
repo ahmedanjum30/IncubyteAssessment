@@ -33,7 +33,7 @@ export function BelowBandTable({ rows, empty }: { rows: Employee[]; empty: strin
             </tr>
           ) : (
             rows.map((e, i) => (
-              <tr key={e.id} className={styles.enter} style={{ animationDelay: `${i * 35}ms` }}>
+              <tr key={e.id} className="row-enter" style={{ animationDelay: `${i * 35}ms` }}>
                 <td>
                   <Link href={`/employees/${e.id}`} className={styles.rowLink}>
                     {e.fullName}

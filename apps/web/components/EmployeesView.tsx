@@ -64,6 +64,9 @@ export function EmployeesView() {
     placeholderData: keepPreviousData,
   });
 
+  const listKey = list.data
+    ? `${list.data.page}-${list.data.total}-${list.data.items[0]?.id}-${list.data.items.at(-1)?.id}`
+    : 'empty';
   const pages = list.data ? Math.max(1, Math.ceil(list.data.total / query.pageSize)) : 1;
 
   useEffect(() => {
@@ -91,7 +94,7 @@ export function EmployeesView() {
   return (
     <main className={styles.page}>
       <div className={styles.head}>
-        <h1>Employees</h1>
+        <h1 className="page-title">Employees</h1>
         <button type="button" className="btn btn-primary" onClick={() => setAdding(true)}>
           Add employee
         </button>
@@ -243,8 +246,12 @@ export function EmployeesView() {
                   </td>
                 </tr>
               ) : null}
-              {list.data?.items.map((e) => (
-                <tr key={e.id}>
+              {list.data?.items.map((e, i) => (
+                <tr
+                  key={`${listKey}-${e.id}`}
+                  className="row-enter"
+                  style={{ animationDelay: `${Math.min(i, 12) * 22}ms` }}
+                >
                   <td>
                     <Link href={`/employees/${e.id}`} className={tableStyles.rowLink}>
                       {e.fullName}

@@ -54,6 +54,7 @@ export function InsightsView() {
   });
 
   const rows = useMemo(() => sortRows(titles.data ?? [], sort), [titles.data, sort]);
+  const rowsKey = useMemo(() => rows.map((r) => r.headcount).join('.'), [rows]);
   const max = niceMax(Math.max(1, ...rows.map((r) => r.maxUsd)));
   const scope = [department, country ? COUNTRIES.find((c) => c.code === country)?.name : null]
     .filter(Boolean)
@@ -62,7 +63,7 @@ export function InsightsView() {
   return (
     <main className={styles.page}>
       <div className={styles.head}>
-        <h1>What we pay for each role</h1>
+        <h1 className="page-title">What we pay for each role</h1>
         <p className="muted">
           Minimum, median and maximum annual base salary per job title, in USD. Use the filters to
           compare a role across countries or within one market.
@@ -193,7 +194,11 @@ export function InsightsView() {
                 </tr>
               ) : null}
               {rows.map((r, i) => (
-                <tr key={`${r.department}-${r.jobTitle}`}>
+                <tr
+                  key={`${rowsKey}-${r.department}-${r.jobTitle}`}
+                  className="row-enter"
+                  style={{ animationDelay: `${Math.min(i, 12) * 22}ms` }}
+                >
                   <td>
                     <Link
                       className={tableStyles.rowLink}

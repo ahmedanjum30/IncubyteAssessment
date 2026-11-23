@@ -49,7 +49,7 @@ export function EmployeeDetailView({ id }: { id: number }) {
     const notFound = error instanceof ApiError && error.status === 404;
     return (
       <main className={styles.page}>
-        <h1 className={styles.name}>
+        <h1 className="page-title">
           {notFound ? 'Employee not found' : 'Could not load employee'}
         </h1>
         <p className="muted">
@@ -74,7 +74,7 @@ export function EmployeeDetailView({ id }: { id: number }) {
       </Link>
       <div className={styles.head}>
         <div>
-          <h1 className={styles.name}>{e.fullName}</h1>
+          <h1 className="page-title">{e.fullName}</h1>
           <p className="muted">
             {e.jobTitle} · L{e.level} · {e.department} · {e.countryName}
           </p>

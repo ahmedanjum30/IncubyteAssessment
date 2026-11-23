@@ -78,7 +78,7 @@ export function OverviewView() {
   return (
     <main className={styles.page}>
       <div className={styles.head}>
-        <h1 key={dept} className={styles.title}>
+        <h1 key={dept} className="page-title">
           {label}, across twelve countries
         </h1>
         <p className="muted">

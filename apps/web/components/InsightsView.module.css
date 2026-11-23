@@ -10,14 +10,6 @@
   min-width: 0;
 }
 
-.head h1 {
-  font-weight: 400;
-  font-size: var(--fs-headline);
-  line-height: 1.03;
-  letter-spacing: -0.025em;
-  margin-bottom: 12px;
-}
-
 .head p {
   max-width: 62ch;
 }

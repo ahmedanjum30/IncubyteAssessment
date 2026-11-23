@@ -29,15 +29,6 @@
   flex-wrap: wrap;
 }
 
-.name {
-  font-weight: 400;
-  font-size: var(--fs-headline);
-  line-height: 1.03;
-  letter-spacing: -0.025em;
-  margin-bottom: 8px;
-  animation: rise 0.5s var(--ease-out) both;
-}
-
 .actions {
   display: flex;
   gap: 10px;

@@ -159,8 +159,7 @@ An ink-on-paper palette with a single attention colour.
 
 ### Hierarchy
 
-- **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): the Overview headline.
-- **Headline** (400, clamp(34px, 3.8vw, 52px)): headlines on Employees, Insights and the employee page. **Dialog** titles use 28px.
+- **Display** (400, clamp(36px, 4.2vw, 58px), 1.02, -0.025em): every page headline, through the shared `.page-title` class, so the headline never changes size or position between pages. **Dialog** titles use 28px.
 - **Stat** (400, 34px, 28px on phones, 1.1): figures in the stats row, proportional numerals.
 - **Title** (500, 19px): plate titles.
 - **Body** (400, 15px, 1.5): everything else, prose capped at 62ch. **Table** text is 14px; secondary lines and captions are **Small** at 12px.
@@ -229,6 +228,8 @@ Zero radius everywhere except stamps (pill). Plates have a 1px hairline border w
 
 - Easing: `cubic-bezier(.19,1,.22,1)` for arrivals and `cubic-bezier(.16,1,.3,1)` for routine state changes.
 - 100–150ms for feedback, 250–450ms for state changes, 700ms only for the plate printing.
+- Page changes: every route fades and rises 10px in (0.45s, `app/template.tsx`). The headline also clears a 5px blur.
+- Table rows ease in with a 22ms stagger (capped at 12 rows) whenever new data lands. Placeholder data during a fetch does not re-trigger it.
 - `prefers-reduced-motion`: spatial motion collapses to opacity and the stamp ring stops.
 
 ## Do's and Don'ts

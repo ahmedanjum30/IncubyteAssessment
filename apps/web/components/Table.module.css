@@ -52,10 +52,6 @@
   color: var(--ink-2);
 }
 
-.enter {
-  animation: rise 0.45s var(--ease-out) both;
-}
-
 .rowLink {
   text-decoration: none;
 }

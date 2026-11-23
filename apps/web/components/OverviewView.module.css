@@ -12,16 +12,6 @@
   grid-column: 1 / 9;
 }
 
-.title {
-  font-weight: 400;
-  font-size: var(--fs-display);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-  margin-bottom: 12px;
-  animation: title-in 0.6s var(--ease-out) both;
-}
-
 .head p {
   max-width: 62ch;
 }
@@ -130,14 +120,6 @@
   gap: 8px;
   padding-top: 18px;
   border-top: 1px solid var(--hair);
-}
-
-@keyframes title-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(5px);
-  }
 }
 
 @media (max-width: 1100px) {
